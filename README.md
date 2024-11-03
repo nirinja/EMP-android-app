@@ -1,10 +1,10 @@
-# EMP- Aplikacija za priporočila receptov
+# Aplikacija za priporočila receptov
 
 Člane skupine: Nika Demšar, Urška Frelih Uhelj
 
 Opis: Razvoj aplikacije, ki glede na želje in sestavine doma prikaže recepte, njihovo težavnost in čas priprave. 
 
-Uporabljene tehnologije: Android Studio, Kotilin, Jatpack Compose
+Uporabljene tehnologije: Android Studio, Kotilin, Jetpack Compose
 
 Github povezava: https://github.com/nirinja/EMP 
 
