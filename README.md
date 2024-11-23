@@ -4,7 +4,7 @@
 
 Opis: Razvoj aplikacije, ki glede na želje in sestavine doma prikaže recepte, njihovo težavnost in čas priprave. 
 
-Uporabljene tehnologije: Android Studio, Kotilin, Jetpack Compose
+Uporabljene tehnologije: Android Studio, Kotilin, Jetpack Compose, Figma
 
 Github povezava: https://github.com/nirinja/EMP 
 
@@ -22,8 +22,4 @@ Okviren seznam primerov uporabe:
 -	Nekaj bi rada jedla za kosilo a neznam dobro kuhati. V aplikaciji filtriram recepte s težavnostjo 1
 -	Želim izvedeti, kako se naredi sufle
 -	Čez pol ure moram od doma pa še nisem nič jedla. V aplikaciji filtriram recepte, ki so pripravljeni v 15min ali manj in izberem najljubšega.
-
-Slike zaslonov za funkcionalnosti:
-...
-
 
