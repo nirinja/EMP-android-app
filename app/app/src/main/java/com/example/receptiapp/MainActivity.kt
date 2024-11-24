@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import android.widget.Button
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,21 +53,32 @@ class MainActivity : AppCompatActivity() {
                 zajtrkBox.takeIf { it.isChecked }?.text,
                 kosiloBox.takeIf { it.isChecked }?.text,
                 vecerjaBox.takeIf { it.isChecked }?.text,
+                tezavnost1Box.takeIf { it.isChecked }?.text,
+                tezavnost2Box.takeIf { it.isChecked }?.text,
+                tezavnost3Box.takeIf { it.isChecked }?.text
+            ).filterNotNull()
+
+            val izbraneDiete = listOf(
                 jajcaBox.takeIf { it.isChecked }?.text,
                 mokaBox.takeIf { it.isChecked }?.text,
-                mlekoBox.takeIf { it.isChecked }?.text
+                mlekoBox.takeIf { it.isChecked }?.text,
+                oresckiBox.takeIf { it.isChecked }?.text,
+                veganBox.takeIf { it.isChecked }?.text,
+                vegetaBox.takeIf { it.isChecked }?.text,
+                morskoBox.takeIf { it.isChecked }?.text,
+                sojaBox.takeIf { it.isChecked }?.text,
+                halalBox.takeIf { it.isChecked }?.text
             ).filterNotNull()
+
         }
 
-        val iskanoText = iskano.text.toString()
-        val inputText = sestavine.text.toString()
 
         isciBtn.setOnClickListener {
             val iskanoText = iskano.text.toString()
             val inputText = sestavine.text.toString()
 
             val intent = Intent(this@MainActivity, MainActivity2::class.java)
-            intent.putExtra("iskano", iskanoText) // Ključi za podatke morajo biti unikatni
+            intent.putExtra("iskano", iskanoText)
             intent.putExtra("sestavine", inputText)
             startActivity(intent)
         }

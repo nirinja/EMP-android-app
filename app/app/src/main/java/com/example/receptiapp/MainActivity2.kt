@@ -31,7 +31,9 @@ class MainActivity2 : AppCompatActivity() {
             insets
         }
 
-        iskanoText = intent.getStringExtra("iskano") ?: "Tamiya"
+        iskanoText =
+            intent.getStringExtra("iskano")?.lowercase()?.replaceFirstChar { it.uppercase() } ?: ""
+        //sestavine todo
         sestavineText = intent.getStringExtra("sestavine") ?: ""
         fetchRecipesData()
     }
@@ -51,7 +53,7 @@ class MainActivity2 : AppCompatActivity() {
                     val strInstructions = recipe.getString("strInstructions")
                     val strMeal = recipe.getString("strMeal")
 
-                    // Posodobi UI na glavni niti
+                    // Posodobi glavno nit
                     CoroutineScope(Dispatchers.Main).launch {
                         binding.imeJedi.text = strMeal
                         binding.navodila.text = strInstructions
