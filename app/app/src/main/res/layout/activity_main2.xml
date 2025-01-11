@@ -24,11 +24,43 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/servings"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="servings"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/cookTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="cookTime"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/prepTimeMinutes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="prepTimeMinutes"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/setavine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="ingredients"
+                android:textSize="16sp" />
+
+            <TextView
                 android:id="@+id/navodila"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
-                android:text="Tu bodo vaša navodila."
+                android:text="instructions"
                 android:textSize="16sp" />
 
         </LinearLayout>

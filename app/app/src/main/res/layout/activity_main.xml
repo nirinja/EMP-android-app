@@ -205,11 +205,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/morsko" />
 
+
     <EditText
         android:id="@+id/sestavineText"
         android:layout_width="324dp"
         android:layout_height="48dp"
+        android:layout_marginStart="43dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="44dp"
         android:layout_marginBottom="117dp"
         android:hint="Sestavine"
         android:inputType="text"
@@ -217,8 +220,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
-
+        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        app:layout_constraintVertical_bias="1.0" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/iscibtn"

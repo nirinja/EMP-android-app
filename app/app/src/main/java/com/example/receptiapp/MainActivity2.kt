@@ -41,22 +41,32 @@ class MainActivity2 : AppCompatActivity() {
     private fun fetchRecipesData() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val url = URL("https://www.themealdb.com/api/json/v1/1/search.php?s=$iskanoText")
+                val url = URL("https://dummyjson.com/recipes/search?q=$iskanoText")
                 val connection = url.openConnection() as HttpURLConnection
                 connection.connect()
                 if (connection.responseCode == 200) {
                     val inputStream = connection.inputStream
                     val response = inputStream.bufferedReader().use { it.readText() }
                     val jsonObject = JSONObject(response)
-                    val recipesArray = jsonObject.getJSONArray("meals")
+                    val recipesArray = jsonObject.getJSONArray("recipes")
+                    val stRecipes = recipesArray.length()
+
+                    val recipe0 = recipesArray.getJSONObject(0)
+                    val instructions = recipe0.getString("instructions")
+                    val ingredients = recipe0.getString("ingredients")
+                    val name = recipe0.getString("name")
+                    val prepTimeMinutes = recipe0.getString("prepTimeMinutes")
+                    val cookTimeMinutes = recipe0.getString("cookTimeMinutes")
+
                     val recipe = recipesArray.getJSONObject(0)
-                    val strInstructions = recipe.getString("strInstructions")
-                    val strMeal = recipe.getString("strMeal")
 
                     // Posodobi glavno nit
                     CoroutineScope(Dispatchers.Main).launch {
-                        binding.imeJedi.text = strMeal
-                        binding.navodila.text = strInstructions
+                        binding.imeJedi.text = name
+                        binding.navodila.text = instructions
+                        binding.setavine.text = ingredients;
+                        binding.setavine.text = ingredients;
+                        binding.cookTime.text = prepTimeMinutes + " + " + cookTimeMinutes + " min";
                     }
                 }
             } catch (e: SecurityException) {
