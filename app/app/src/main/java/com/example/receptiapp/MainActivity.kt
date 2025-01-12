@@ -2,6 +2,7 @@ package com.example.receptiapp
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -19,10 +20,10 @@ import java.net.URL
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private val TAG = "MainActivityLifecycle"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         // Inflate the layout for activity_main.xml
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -47,6 +48,36 @@ class MainActivity : AppCompatActivity() {
         }
 
         fetchRecipesData()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.d(TAG, "onStart() klican")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d(TAG, "onResume() klican")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d(TAG, "onPause() klican")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d(TAG, "onStop() klican")
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        Log.d(TAG, "onRestart() klican")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d(TAG, "onDestroy() klican")
     }
 
     private fun fetchRecipesData() {
@@ -84,7 +115,7 @@ class MainActivity : AppCompatActivity() {
                             itemView.findViewById<TextView>(R.id.tvInstructions).text = instructions
                             itemView.findViewById<TextView>(R.id.tvTimes).text = "$prepTime min + $cookTime min"
 
-                            // STEP: set an OnClickListener for this item
+                            // Set an OnClickListener for this item
                             itemView.setOnClickListener {
                                 val intent = Intent(this@MainActivity, RecipeActivity::class.java)
                                 intent.putExtra("RECIPE", recipeObj.toString())
@@ -96,7 +127,7 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             } catch (e: Exception) {
-                println("Exception: ${e.message}")
+                Log.e(TAG, "Prišlo je do izjeme: ${e.message}")
             }
         }
     }

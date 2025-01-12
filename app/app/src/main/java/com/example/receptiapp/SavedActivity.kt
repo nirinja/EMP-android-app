@@ -6,8 +6,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.receptiapp.databinding.ActivityRecipeBinding
-import com.example.receptiapp.databinding.ActivityResultsBinding
 import com.example.receptiapp.databinding.ActivitySavedBinding
 
 class SavedActivity : AppCompatActivity() {
@@ -16,15 +14,19 @@ class SavedActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
+        // Inflate binding and set content view once
         binding = ActivitySavedBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setContentView(R.layout.activity_saved)
+
+        // Apply insets to "main" view (ensure that the id exists in activity_saved.xml)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
+        // Button click listeners
         binding.iscibtn.setOnClickListener {
             val intent = Intent(this@SavedActivity, SearchActivity::class.java)
             startActivity(intent)
