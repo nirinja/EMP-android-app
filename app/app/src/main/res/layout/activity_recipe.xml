@@ -3,11 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mainConstraintLayout"
+    android:id="@+id/recipeConstraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FDFCFC"
-    tools:context=".MainActivity">
+    tools:context=".RecipeActivity">
+
 
     <TextView
         android:id="@+id/Logo"
@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="44dp"
-        android:text="We recommend:"
+        android:text="Recipe:"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -51,24 +51,79 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/saved" />
 
+
+    <TextView
+        android:id="@+id/imeJedi"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="100dp"
+        android:text="name"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="45dp"
-        android:layout_marginEnd="45dp"
+        android:layout_marginEnd="40dp"
         android:layout_marginBottom="40dp"
-        android:layout_marginTop="40dp"
-        android:importantForAccessibility="no"
-        app:layout_constraintTop_toBottomOf="@+id/Logo"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imeJedi">
 
         <LinearLayout
-            android:id="@+id/recipesContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" />
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/servings"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="servings"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/cookTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="cookTime"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/prepTimeMinutes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="prepTimeMinutes"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/setavine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="ingredients"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/navodila"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="instructions"
+                android:textSize="16sp" />
+
+        </LinearLayout>
     </ScrollView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
