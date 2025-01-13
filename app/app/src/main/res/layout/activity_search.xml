@@ -13,7 +13,7 @@
         android:layout_height="49dp"
         android:layout_marginTop="32dp"
         android:ems="10"
-        android:hint="Išči..."
+        android:hint="Search..."
         android:inputType="text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

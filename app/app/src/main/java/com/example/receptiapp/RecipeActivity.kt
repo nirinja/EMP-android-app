@@ -6,13 +6,12 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.receptiapp.data.Recipe
 import com.example.receptiapp.databinding.ActivityRecipeBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.json.JSONObject
-import java.net.HttpURLConnection
-import java.net.URL
 
 class RecipeActivity : AppCompatActivity() {
 
@@ -21,13 +20,12 @@ class RecipeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // Inflate the layout using ViewBinding
         binding = ActivityRecipeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         enableEdgeToEdge()
 
-        // Use the correct view id from your layout file
+        // Nastavitev WindowInsets (prepričaj se, da imaš pravilen id)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.recipeConstraintLayout)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -39,30 +37,64 @@ class RecipeActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        // Ko kliknemo na gumb za shranjevanje, shranimo ali izbrišemo recept v/iz baze in preusmerimo v SavedActivity
         binding.savedBtn.setOnClickListener {
-            val intent = Intent(this@RecipeActivity, SavedActivity::class.java)
-            startActivity(intent)
+            saveRecipeToDatabase()
         }
 
-
-        // Remove spaces from the received recipe name
+        // Dobimo JSON podatek za prikaz recepta
         receptText = intent.getStringExtra("RECIPE")
         val myRecipe = JSONObject(receptText)
 
+        // Pridobivanje podatkov iz JSON objekta
         val name = myRecipe.getString("name")
-        val instructions = myRecipe.getJSONArray("instructions")
-        val ingredients = myRecipe.getJSONArray("ingredients")
+        val instructionsJson = myRecipe.getJSONArray("instructions")
+        val ingredientsJson = myRecipe.getJSONArray("ingredients")
         val prepTimeMinutes = myRecipe.getInt("prepTimeMinutes")
         val cookTimeMinutes = myRecipe.getInt("cookTimeMinutes")
 
-        // Switch to Main Thread to update UI:
+        // Prikaz podatkov – po potrebi prilagodi, kako združiš podatke
         CoroutineScope(Dispatchers.Main).launch {
             binding.imeJedi.text = name
-            binding.navodila.text =
-                instructions.join(" ")  // Customize how you display instructions.
-            binding.setavine.text =
-                ingredients.join(" ")     // Customize how you display ingredients.
+            binding.navodila.text = instructionsJson.join(" ") // Prikaz navodil kot en niz
+            binding.setavine.text = ingredientsJson.join(" ")    // Prikaz sestavin kot en niz
             binding.cookTime.text = "$prepTimeMinutes + $cookTimeMinutes min"
+        }
+    }
+
+    private fun saveRecipeToDatabase() {
+        receptText?.let {
+            val myRecipe = JSONObject(it)
+            val name = myRecipe.getString("name")
+            val instructionsJson = myRecipe.getJSONArray("instructions")
+            // Ustvarimo opis, združimo sestavine in podatke o časih
+            val description = "Sestavine: " + myRecipe.getJSONArray("ingredients").join(" ") +
+                    "\nČas priprave: ${myRecipe.getInt("prepTimeMinutes")} min" +
+                    "\nČas kuhanja: ${myRecipe.getInt("cookTimeMinutes")} min"
+            val instructions = instructionsJson.join(" ")
+
+            // Ustvarimo objekt Recipe
+            val recipe = Recipe(
+                recipeId = 0, // pri autoGenerate ni potrebno podajati ID-ja
+                name = name,
+                description = description,
+                instructions = instructions,
+                imageUrl = null,  // če nimaš slike, pusti null
+                categoryId = null // če ne uporabljaš kategorij, naj bo null
+            )
+
+            // Shranjevanje ali brisanje v ozadni niti
+            CoroutineScope(Dispatchers.IO).launch {
+                // Preverimo, če recept z istim imenom že obstaja
+                val existingRecipe = MyApplication.database.recipeDao().getRecipeByName(name)
+                if (existingRecipe != null) {
+                    // Če recept obstaja, ga izbrišemo iz baze
+                    MyApplication.database.recipeDao().deleteRecipe(existingRecipe)
+                } else {
+                    // Če recepta še ni, ga dodamo v bazo
+                    MyApplication.database.recipeDao().insertRecipe(recipe)
+                }
+            }
         }
     }
 }
