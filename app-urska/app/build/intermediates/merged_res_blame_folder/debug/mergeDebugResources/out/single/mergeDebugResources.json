@@ -1,0 +1,110 @@
+[
+    {
+        "merged": "com.example.receptiapp-debug-74:/layout_item_recipe.xml.flat",
+        "source": "com.example.receptiapp-main-76:/layout/item_recipe.xml"
+    },
+    {
+        "merged": "com.example.receptiapp-debug-74:/layout_activity_search.xml.flat",
+        "source": "com.example.receptiapp-main-76:/layout/activity_search.xml"
+    },
+    {
+        "merged": "com.example.receptiapp-debug-74:/xml_backup_rules.xml.flat",
+        "source": "com.example.receptiapp-main-76:/xml/backup_rules.xml"
+    },
+    {
+        "merged": "com.example.receptiapp-debug-74:/xml_data_extraction_rules.xml.flat",
+        "source": "com.example.receptiapp-main-76:/xml/data_extraction_rules.xml"
+    },
+    {
+        "merged": "com.example.receptiapp-debug-74:/drawable_search.xml.flat",
+        "source": "com.example.receptiapp-main-76:/drawable/search.xml"
+    },
+    {
+        "merged": "com.example.receptiapp-debug-74:/layout_activity_saved.xml.flat",
+        "source": "com.example.receptiapp-main-76:/layout/activity_saved.xml"
+    },
+    {
+        "merged": "com.example.receptiapp-debug-74:/mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "com.example.receptiapp-main-76:/mipmap-xxxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.receptiapp-debug-74:/drawable_saved.xml.flat",
+        "source": "com.example.receptiapp-main-76:/drawable/saved.xml"
+    },
+    {
+        "merged": "com.example.receptiapp-debug-74:/mipmap-anydpi_ic_launcher_round.xml.flat",
+        "source": "com.example.receptiapp-main-76:/mipmap-anydpi/ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.example.receptiapp-debug-74:/mipmap-anydpi_ic_launcher.xml.flat",
+        "source": "com.example.receptiapp-main-76:/mipmap-anydpi/ic_launcher.xml"
+    },
+    {
+        "merged": "com.example.receptiapp-debug-74:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.receptiapp-main-76:/mipmap-xxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.receptiapp-debug-74:/mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "com.example.receptiapp-main-76:/mipmap-xxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.receptiapp-debug-74:/layout_activity_main.xml.flat",
+        "source": "com.example.receptiapp-main-76:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.example.receptiapp-debug-74:/drawable-nodpi_pizza_gobice.jpeg.flat",
+        "source": "com.example.receptiapp-main-76:/drawable-nodpi/pizza_gobice.jpeg"
+    },
+    {
+        "merged": "com.example.receptiapp-debug-74:/mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "com.example.receptiapp-main-76:/mipmap-mdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.receptiapp-debug-74:/mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "com.example.receptiapp-main-76:/mipmap-hdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.receptiapp-debug-74:/mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "com.example.receptiapp-main-76:/mipmap-xhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.receptiapp-debug-74:/xml_network_security_config.xml.flat",
+        "source": "com.example.receptiapp-main-76:/xml/network_security_config.xml"
+    },
+    {
+        "merged": "com.example.receptiapp-debug-74:/drawable_ic_launcher_background.xml.flat",
+        "source": "com.example.receptiapp-main-76:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "com.example.receptiapp-debug-74:/drawable_save.xml.flat",
+        "source": "com.example.receptiapp-main-76:/drawable/save.xml"
+    },
+    {
+        "merged": "com.example.receptiapp-debug-74:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.receptiapp-main-76:/mipmap-xxxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.receptiapp-debug-74:/mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.receptiapp-main-76:/mipmap-hdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.receptiapp-debug-74:/layout_activity_results.xml.flat",
+        "source": "com.example.receptiapp-main-76:/layout/activity_results.xml"
+    },
+    {
+        "merged": "com.example.receptiapp-debug-74:/mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.receptiapp-main-76:/mipmap-mdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.receptiapp-debug-74:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "com.example.receptiapp-main-76:/drawable/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "com.example.receptiapp-debug-74:/mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.receptiapp-main-76:/mipmap-xhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.receptiapp-debug-74:/layout_activity_recipe.xml.flat",
+        "source": "com.example.receptiapp-main-76:/layout/activity_recipe.xml"
+    }
+]
