@@ -3,132 +3,253 @@ package com.example.receptiapp
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.TextView
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.example.receptiapp.databinding.ActivityMainBinding
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import org.json.JSONArray
 import org.json.JSONObject
 import java.net.HttpURLConnection
 import java.net.URL
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : ComponentActivity() {
 
-    private lateinit var binding: ActivityMainBinding
     private val TAG = "MainActivityLifecycle"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // Inflate the layout for activity_main.xml
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
         enableEdgeToEdge()
 
-        // Apply insets to mainConstraintLayout
-        ViewCompat.setOnApplyWindowInsetsListener(binding.mainConstraintLayout) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+        setContent {
+            ReceptiAppTheme {
+                MainScreen(
+                    onSearchClick = { startActivity(Intent(this, SearchActivity::class.java)) },
+                    onSavedClick = { startActivity(Intent(this, SavedActivity::class.java)) }
+                )
+            }
         }
-
-        binding.iscibtn.setOnClickListener {
-            val intent = Intent(this@MainActivity, SearchActivity::class.java)
-            startActivity(intent)
-        }
-
-        binding.savedBtn.setOnClickListener {
-            val intent = Intent(this@MainActivity, SavedActivity::class.java)
-            startActivity(intent)
-        }
-
-        fetchRecipesData()
+        Log.d(TAG, "onCreate() called")
     }
 
     override fun onStart() {
         super.onStart()
-        Log.d(TAG, "onStart() klican")
+        Log.d(TAG, "onStart() called")
     }
 
     override fun onResume() {
         super.onResume()
-        Log.d(TAG, "onResume() klican")
+        Log.d(TAG, "onResume() called")
     }
 
     override fun onPause() {
         super.onPause()
-        Log.d(TAG, "onPause() klican")
+        Log.d(TAG, "onPause() called")
     }
 
     override fun onStop() {
         super.onStop()
-        Log.d(TAG, "onStop() klican")
+        Log.d(TAG, "onStop() called")
     }
 
     override fun onRestart() {
         super.onRestart()
-        Log.d(TAG, "onRestart() klican")
+        Log.d(TAG, "onRestart() called")
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        Log.d(TAG, "onDestroy() klican")
+        Log.d(TAG, "onDestroy() called")
+    }
+}
+
+@Composable
+fun MainScreen(
+    onSearchClick: () -> Unit,
+    onSavedClick: () -> Unit
+) {
+    var recipes by remember { mutableStateOf<List<Recipe>>(emptyList()) }
+    val context = LocalContext.current
+
+    LaunchedEffect(Unit) {
+        recipes = fetchRecipesData()
     }
 
-    private fun fetchRecipesData() {
-        CoroutineScope(Dispatchers.IO).launch {
-            try {
-                val url = URL("https://dummyjson.com/recipes")
-                val connection = url.openConnection() as HttpURLConnection
-                connection.connect()
-                if (connection.responseCode == 200) {
-                    val inputStream = connection.inputStream
-                    val response = inputStream.bufferedReader().use { it.readText() }
-                    val jsonObject = JSONObject(response)
-                    val recipesArray = jsonObject.getJSONArray("recipes")
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Button(onClick = onSearchClick) {
+                Text(text = "Search")
+            }
+            Button(onClick = onSavedClick) {
+                Text(text = "Saved")
+            }
+        }
 
-                    val count = minOf(10, recipesArray.length())
+        Spacer(modifier = Modifier.height(16.dp))
 
-                    // Switch to the main thread to update UI
-                    launch(Dispatchers.Main) {
-                        val container = binding.recipesContainer
-                        container.removeAllViews()
-
-                        for (i in 0 until count) {
-                            val recipeObj = recipesArray.getJSONObject(i)
-                            val name = recipeObj.getString("name")
-                            val instructions = recipeObj.getString("instructions")
-                            val ingredients = recipeObj.getString("ingredients")
-                            val prepTime = recipeObj.getString("prepTimeMinutes")
-                            val cookTime = recipeObj.getString("cookTimeMinutes")
-
-                            // Inflate the single-recipe layout
-                            val itemView = layoutInflater.inflate(R.layout.item_recipe, container, false)
-                            // Populate it
-                            itemView.findViewById<TextView>(R.id.tvRecipeName).text = name
-                            itemView.findViewById<TextView>(R.id.tvIngredients).text = ingredients
-                            itemView.findViewById<TextView>(R.id.tvInstructions).text = instructions
-                            itemView.findViewById<TextView>(R.id.tvTimes).text = "$prepTime min + $cookTime min"
-
-                            // Set an OnClickListener for this item
-                            itemView.setOnClickListener {
-                                val intent = Intent(this@MainActivity, RecipeActivity::class.java)
-                                intent.putExtra("RECIPE", recipeObj.toString())
-                                startActivity(intent)
-                            }
-
-                            container.addView(itemView)
+        LazyVerticalGrid(
+            columns = GridCells.Fixed(2),
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            modifier = Modifier.fillMaxSize()
+        ) {
+            items(recipes) { recipe ->
+                RecipeItem(
+                    recipe = recipe,
+                    onClick = {
+                        val intent = Intent(context, RecipeActivity::class.java).apply {
+                            putExtra("RECIPE", JSONObject().apply {
+                                put("name", recipe.name)
+                                put("instructions", JSONArray(recipe.instructions))
+                                put("ingredients", JSONArray(recipe.ingredients))
+                                put("prepTimeMinutes", recipe.prepTime.toInt())
+                                put("cookTimeMinutes", recipe.cookTime.toInt())
+                            }.toString())
                         }
+                        context.startActivity(intent)
                     }
-                }
-            } catch (e: Exception) {
-                Log.e(TAG, "Prišlo je do izjeme: ${e.message}")
+                )
             }
         }
     }
 }
+
+@Composable
+fun RecipeItem(recipe: Recipe, onClick: () -> Unit) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 4.dp)
+            .clickable { onClick() },
+        shape = RoundedCornerShape(15.dp),
+        elevation = CardDefaults.cardElevation(4.dp)
+    ) {
+        Box(modifier = Modifier.height(200.dp)) {
+            AsyncImage(
+                model = recipe.image,
+                contentDescription = recipe.name,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.fillMaxSize()
+            )
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(
+                        brush = Brush.verticalGradient(
+                            colors = listOf(Color.Transparent, Color.Black),
+                            startY = 300f
+                        )
+                    )
+            )
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(12.dp),
+                contentAlignment = Alignment.BottomStart
+            ) {
+                Column {
+                    Text(
+                        recipe.name,
+                        style = TextStyle(
+                            color = Color.White,
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Bold
+                        )
+                    )
+                    Text(
+                        "Prep: ${recipe.prepTime} min | Cook: ${recipe.cookTime} min | ${recipe.difficulty}",
+                        style = TextStyle(color = Color.LightGray, fontSize = 9.sp)
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun ReceptiAppTheme(content: @Composable () -> Unit) {
+    MaterialTheme(
+        content = content
+    )
+}
+
+suspend fun fetchRecipesData(): List<Recipe> {
+    return withContext(Dispatchers.IO) {
+        try {
+            val url = URL("https://dummyjson.com/recipes")
+            val connection = url.openConnection() as HttpURLConnection
+            connection.connect()
+            if (connection.responseCode == 200) {
+                val response = connection.inputStream.bufferedReader().readText()
+                val jsonArray = JSONObject(response).getJSONArray("recipes")
+                parseRecipes(jsonArray)
+            } else emptyList()
+        } catch (e: Exception) {
+            Log.e("MainScreen", "Error fetching recipes: ${e.message}")
+            emptyList()
+        }
+    }
+}
+
+fun parseRecipes(jsonArray: JSONArray): List<Recipe> {
+    val recipes = mutableListOf<Recipe>()
+    for (i in 0 until jsonArray.length()) {
+        val jsonObject = jsonArray.getJSONObject(i)
+        recipes.add(
+            Recipe(
+                name = jsonObject.getString("name"),
+                ingredients = jsonObject.getJSONArray("ingredients").toList(),
+                instructions = jsonObject.getJSONArray("instructions").toList(),
+                prepTime = jsonObject.getInt("prepTimeMinutes"),
+                cookTime = jsonObject.getInt("cookTimeMinutes"),
+                difficulty = jsonObject.getString("difficulty"),
+                image = jsonObject.getString("image")
+            )
+        )
+    }
+    return recipes
+}
+
+private fun JSONArray.toList(): List<String> {
+    return List(length()) { i -> getString(i) }
+}
+
+data class Recipe(
+    val name: String,
+    val ingredients: List<String>,
+    val instructions: List<String>,
+    val prepTime: Int,
+    val cookTime: Int,
+    val difficulty: String,
+    val image: String
+)

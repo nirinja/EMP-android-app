@@ -1,7 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.compose.compiler) // Ensure this plugin is declared
+    alias(libs.plugins.compose.compiler)
     id("com.google.devtools.ksp") version "2.1.0-1.0.29"
     kotlin("kapt")
 }
@@ -21,8 +21,12 @@ android {
     }
 
     buildFeatures {
-        compose = true // Enables Compose support
-        viewBinding = true // Enables ViewBinding support
+        compose = true
+        viewBinding = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.9.2"
     }
 
     buildTypes {
@@ -52,6 +56,7 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.support.annotations)
+    implementation(libs.androidx.foundation.layout.android)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -64,20 +69,31 @@ dependencies {
     implementation("androidx.compose.material3:material3")
 
     // Compose UI
-    implementation("androidx.compose.ui:ui")
+    implementation("androidx.compose.ui:ui:1.5.0")
     implementation("androidx.compose.ui:ui-tooling-preview")
+    implementation("androidx.compose.foundation:foundation:1.5.0")
+    implementation("androidx.compose.material3:material3:1.1.0") // If using Material 3
+
+
     debugImplementation("androidx.compose.ui:ui-tooling")
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
-    debugImplementation("androidx.compose.ui:ui-test-manifest")
+    implementation("io.coil-kt:coil-compose:2.3.0") // Add this for Coil
+
+    androidTestImplementation(libs.androidx.ui.test.junit4)
+    debugImplementation(libs.androidx.ui.test.manifest)
 
     // Optional - Adaptive Material Design
-    implementation("androidx.compose.material3.adaptive:adaptive")
+    implementation(libs.androidx.adaptive)
 
     // Activity, ViewModel, LiveData, and RxJava integrations
-    implementation("androidx.activity:activity-compose:1.9.2")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.5")
-    implementation("androidx.compose.runtime:runtime-livedata")
-    implementation("androidx.compose.runtime:runtime-rxjava2")
+    implementation("androidx.activity:activity-compose")
+    implementation("androidx.lifecycle:lifecycle-runtime-compose")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose")
+    implementation("androidx.navigation:navigation-compose:2.8.5")
+    implementation(libs.androidx.runtime.livedata)
+    implementation(libs.androidx.runtime.rxjava2)
+    implementation(libs.ui)
+    implementation(libs.material3)
+    implementation(libs.ui.tooling)
 
 
     val roomVersion = "2.6.1" // Use the latest version
