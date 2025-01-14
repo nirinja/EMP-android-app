@@ -55,8 +55,8 @@ class SavedActivity : AppCompatActivity() {
                 recipesFromDb.forEach { recipe ->
                     val itemView = layoutInflater.inflate(R.layout.item_recipe, container, false)
                     itemView.findViewById<TextView>(R.id.tvRecipeName).text = recipe.name
-                    itemView.findViewById<TextView>(R.id.tvIngredients).text = recipe.description // ali ingrediente, če jih imaš
-                    itemView.findViewById<TextView>(R.id.tvInstructions).text = recipe.instructions
+                    itemView.findViewById<TextView>(R.id.tvIngredients).text = recipe.ingredients.toString()
+                    itemView.findViewById<TextView>(R.id.tvInstructions).text = recipe.instructions.toString()
                     // Nastavi drug UI podatke po potrebi
 
                     itemView.setOnClickListener {

@@ -17,8 +17,12 @@ data class Recipe(
     @PrimaryKey(autoGenerate = true)
     val recipeId: Int = 0,
     val name: String,
-    val description: String,
+    val ingredients: String,
     val instructions: String,
-    val imageUrl: String?,
-    val categoryId: Int? // Lahko je null, če recept še nima določene kategorije
+    val prepTime: Int,
+    val cookTime: Int,
+    val difficulty: String,
+    val image: String,
+    val mealType: String,
+    val categoryId: Int?
 )

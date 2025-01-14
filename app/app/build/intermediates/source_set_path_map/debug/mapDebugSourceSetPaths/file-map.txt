@@ -1,0 +1,85 @@
+com.example.receptiapp-lifecycle-viewmodel-release-0 C:\Users\demsa\.gradle\caches\8.9\transforms\004064be75b63718feba94a96e9eff84\transformed\lifecycle-viewmodel-release\res
+com.example.receptiapp-room-rxjava2-2.6.1-1 C:\Users\demsa\.gradle\caches\8.9\transforms\013678893623eb33678acf519512bc3f\transformed\room-rxjava2-2.6.1\res
+com.example.receptiapp-ui-text-release-2 C:\Users\demsa\.gradle\caches\8.9\transforms\04bdcc81ab271458b5400916015ffd13\transformed\ui-text-release\res
+com.example.receptiapp-fragment-1.5.4-3 C:\Users\demsa\.gradle\caches\8.9\transforms\0616defac95be78b61a7ef626995f854\transformed\fragment-1.5.4\res
+com.example.receptiapp-lifecycle-runtime-ktx-release-4 C:\Users\demsa\.gradle\caches\8.9\transforms\0734b2b6e47cfef43c7b50d5aa4c4c33\transformed\lifecycle-runtime-ktx-release\res
+com.example.receptiapp-room-guava-2.6.1-5 C:\Users\demsa\.gradle\caches\8.9\transforms\074d1d6fc6401a885021cda744b4452b\transformed\room-guava-2.6.1\res
+com.example.receptiapp-ui-tooling-release-6 C:\Users\demsa\.gradle\caches\8.9\transforms\083343f666c4130a3f630ffd8bb8ad15\transformed\ui-tooling-release\res
+com.example.receptiapp-ui-geometry-release-7 C:\Users\demsa\.gradle\caches\8.9\transforms\0a9b712c0f8597cbaa6640fa20166907\transformed\ui-geometry-release\res
+com.example.receptiapp-emoji2-1.3.0-8 C:\Users\demsa\.gradle\caches\8.9\transforms\0f7b07f488e1ab9422e81049e6211364\transformed\emoji2-1.3.0\res
+com.example.receptiapp-runtime-release-9 C:\Users\demsa\.gradle\caches\8.9\transforms\1302efba56419c161978f3dc9a7596b4\transformed\runtime-release\res
+com.example.receptiapp-core-1.15.0-10 C:\Users\demsa\.gradle\caches\8.9\transforms\17ae6ff7ae932606c319c6753f3f8e56\transformed\core-1.15.0\res
+com.example.receptiapp-navigation-common-ktx-2.8.5-11 C:\Users\demsa\.gradle\caches\8.9\transforms\1870531709b0d6527d93b013bd380635\transformed\navigation-common-ktx-2.8.5\res
+com.example.receptiapp-material-1.12.0-12 C:\Users\demsa\.gradle\caches\8.9\transforms\18d7341169c30ddf2463fa3a492a06c7\transformed\material-1.12.0\res
+com.example.receptiapp-lifecycle-runtime-release-13 C:\Users\demsa\.gradle\caches\8.9\transforms\1ce207fd7e6c65bb87c5002ddd2284e0\transformed\lifecycle-runtime-release\res
+com.example.receptiapp-material3-release-14 C:\Users\demsa\.gradle\caches\8.9\transforms\1d8b6b59b956ce8f80e6a4d239000b3d\transformed\material3-release\res
+com.example.receptiapp-customview-poolingcontainer-1.0.0-15 C:\Users\demsa\.gradle\caches\8.9\transforms\2238a0a9e5e5e7ede62c3d8e5c50ef4d\transformed\customview-poolingcontainer-1.0.0\res
+com.example.receptiapp-ui-tooling-preview-release-16 C:\Users\demsa\.gradle\caches\8.9\transforms\22557a6c77f39d0329c958348581fa74\transformed\ui-tooling-preview-release\res
+com.example.receptiapp-room-rxjava3-2.6.1-17 C:\Users\demsa\.gradle\caches\8.9\transforms\269e40bf8b9b4272bff4be2c33f54b7d\transformed\room-rxjava3-2.6.1\res
+com.example.receptiapp-appcompat-1.7.0-18 C:\Users\demsa\.gradle\caches\8.9\transforms\29eb2b5e6584b1e67e5554ff8b30de3e\transformed\appcompat-1.7.0\res
+com.example.receptiapp-navigation-common-2.8.5-19 C:\Users\demsa\.gradle\caches\8.9\transforms\2a2042ae9a167231a11e13d78ea8656a\transformed\navigation-common-2.8.5\res
+com.example.receptiapp-navigation-runtime-2.8.5-20 C:\Users\demsa\.gradle\caches\8.9\transforms\2c0e00c3c28aefa544782d35c9031b79\transformed\navigation-runtime-2.8.5\res
+com.example.receptiapp-emoji2-views-helper-1.3.0-21 C:\Users\demsa\.gradle\caches\8.9\transforms\3554ced0b0ba6ea0639456463adcc7bf\transformed\emoji2-views-helper-1.3.0\res
+com.example.receptiapp-transition-1.5.0-22 C:\Users\demsa\.gradle\caches\8.9\transforms\39d3fdfb7907ecb8fbb7416d8a3c92a3\transformed\transition-1.5.0\res
+com.example.receptiapp-ui-unit-release-23 C:\Users\demsa\.gradle\caches\8.9\transforms\3d25b5d59d7f176c84b7f9318989dbaf\transformed\ui-unit-release\res
+com.example.receptiapp-sqlite-framework-2.4.0-24 C:\Users\demsa\.gradle\caches\8.9\transforms\3ed73b5899814b3ef11cc5a5e0f91398\transformed\sqlite-framework-2.4.0\res
+com.example.receptiapp-constraintlayout-2.2.0-25 C:\Users\demsa\.gradle\caches\8.9\transforms\3f65732989594c5dbf3379a97cc2cd1b\transformed\constraintlayout-2.2.0\res
+com.example.receptiapp-adaptive-release-26 C:\Users\demsa\.gradle\caches\8.9\transforms\40b1d277265bdc9cc00cd3a5b3d89bfe\transformed\adaptive-release\res
+com.example.receptiapp-window-core-release-27 C:\Users\demsa\.gradle\caches\8.9\transforms\493588364e9277c6c88172a92334db58\transformed\window-core-release\res
+com.example.receptiapp-activity-1.9.3-28 C:\Users\demsa\.gradle\caches\8.9\transforms\49c385dcb9b650397f1acad7f020365b\transformed\activity-1.9.3\res
+com.example.receptiapp-core-1.0.0-29 C:\Users\demsa\.gradle\caches\8.9\transforms\4aafc507959baf55a97d5ebec2ea20e7\transformed\core-1.0.0\res
+com.example.receptiapp-appcompat-resources-1.7.0-30 C:\Users\demsa\.gradle\caches\8.9\transforms\533b06335c455acec209a37e6a25b9cd\transformed\appcompat-resources-1.7.0\res
+com.example.receptiapp-savedstate-ktx-1.2.1-31 C:\Users\demsa\.gradle\caches\8.9\transforms\5539b68928edd8af3b1591064081ee56\transformed\savedstate-ktx-1.2.1\res
+com.example.receptiapp-room-paging-2.6.1-32 C:\Users\demsa\.gradle\caches\8.9\transforms\55f67cee7f2e1f0327acb567e315f91c\transformed\room-paging-2.6.1\res
+com.example.receptiapp-foundation-release-33 C:\Users\demsa\.gradle\caches\8.9\transforms\5669b6d1f2b9c1a6ea81bc84959d192c\transformed\foundation-release\res
+com.example.receptiapp-runtime-rxjava2-1.7.6-34 C:\Users\demsa\.gradle\caches\8.9\transforms\57050f3a1587a48bb824379423bb72ae\transformed\runtime-rxjava2-1.7.6\res
+com.example.receptiapp-profileinstaller-1.4.0-35 C:\Users\demsa\.gradle\caches\8.9\transforms\59f5821f9f7b933e4bc4e774a155f834\transformed\profileinstaller-1.4.0\res
+com.example.receptiapp-coil-base-2.3.0-36 C:\Users\demsa\.gradle\caches\8.9\transforms\5e3a1fa37ea54845bd4eac784b1ef999\transformed\coil-base-2.3.0\res
+com.example.receptiapp-sqlite-2.4.0-37 C:\Users\demsa\.gradle\caches\8.9\transforms\62ace1f525c219fe8e2610940b5ceff2\transformed\sqlite-2.4.0\res
+com.example.receptiapp-lifecycle-livedata-core-2.8.3-38 C:\Users\demsa\.gradle\caches\8.9\transforms\68c804a7eec3ca7f9cd50a7ebbd97f8d\transformed\lifecycle-livedata-core-2.8.3\res
+com.example.receptiapp-annotation-experimental-1.4.1-39 C:\Users\demsa\.gradle\caches\8.9\transforms\6b10a7402d7c22ce93883f13dfe722aa\transformed\annotation-experimental-1.4.1\res
+com.example.receptiapp-foundation-layout-release-40 C:\Users\demsa\.gradle\caches\8.9\transforms\6da5b31891ecb694dab394556579ddc2\transformed\foundation-layout-release\res
+com.example.receptiapp-material-release-41 C:\Users\demsa\.gradle\caches\8.9\transforms\713b354572b7ea788d20d5180c2e82b7\transformed\material-release\res
+com.example.receptiapp-animation-release-42 C:\Users\demsa\.gradle\caches\8.9\transforms\7dc0f7c4532eca25b3ffe22d2061e1d2\transformed\animation-release\res
+com.example.receptiapp-lifecycle-livedata-core-ktx-2.8.3-43 C:\Users\demsa\.gradle\caches\8.9\transforms\83b5da69b9b6a273bfcb7322044dedbc\transformed\lifecycle-livedata-core-ktx-2.8.3\res
+com.example.receptiapp-runtime-saveable-release-44 C:\Users\demsa\.gradle\caches\8.9\transforms\85780b666e6490dc096ea7ba9b7cc607\transformed\runtime-saveable-release\res
+com.example.receptiapp-material-icons-core-release-45 C:\Users\demsa\.gradle\caches\8.9\transforms\8d93299393dd2cdf216676dd8abea57d\transformed\material-icons-core-release\res
+com.example.receptiapp-ui-graphics-release-46 C:\Users\demsa\.gradle\caches\8.9\transforms\8ea325174dbe2832db33148edbcadacf\transformed\ui-graphics-release\res
+com.example.receptiapp-navigation-compose-2.8.5-47 C:\Users\demsa\.gradle\caches\8.9\transforms\8fe9100bf70b11000cf35fced139b770\transformed\navigation-compose-2.8.5\res
+com.example.receptiapp-core-ktx-1.15.0-48 C:\Users\demsa\.gradle\caches\8.9\transforms\91b9873f241cfe9560aa93e8d43fd550\transformed\core-ktx-1.15.0\res
+com.example.receptiapp-lifecycle-process-2.8.3-49 C:\Users\demsa\.gradle\caches\8.9\transforms\96195e9a0d1283ae2ff5884ebf86a73e\transformed\lifecycle-process-2.8.3\res
+com.example.receptiapp-room-runtime-2.6.1-50 C:\Users\demsa\.gradle\caches\8.9\transforms\9654b5979d9d90869bfb8719bd4793e3\transformed\room-runtime-2.6.1\res
+com.example.receptiapp-cardview-1.0.0-51 C:\Users\demsa\.gradle\caches\8.9\transforms\99573c2604ba7647fe0d08d7f9782601\transformed\cardview-1.0.0\res
+com.example.receptiapp-graphics-path-1.0.1-52 C:\Users\demsa\.gradle\caches\8.9\transforms\9ca4bb67b849fcb80ff04fb5ea0d3dff\transformed\graphics-path-1.0.1\res
+com.example.receptiapp-activity-ktx-1.9.3-53 C:\Users\demsa\.gradle\caches\8.9\transforms\9dc8493809c94359eef40f4d544d5cca\transformed\activity-ktx-1.9.3\res
+com.example.receptiapp-viewpager2-1.0.0-54 C:\Users\demsa\.gradle\caches\8.9\transforms\a097d04f929489767af05f8e062f5555\transformed\viewpager2-1.0.0\res
+com.example.receptiapp-window-1.3.0-55 C:\Users\demsa\.gradle\caches\8.9\transforms\a56d3a25fc75bdc515cf52325c95f87c\transformed\window-1.3.0\res
+com.example.receptiapp-lifecycle-runtime-compose-release-56 C:\Users\demsa\.gradle\caches\8.9\transforms\a577435a05c2a58aaaa69271c0cfe50e\transformed\lifecycle-runtime-compose-release\res
+com.example.receptiapp-drawerlayout-1.1.1-57 C:\Users\demsa\.gradle\caches\8.9\transforms\a7c478a31cea4f16e9b941fc35393cec\transformed\drawerlayout-1.1.1\res
+com.example.receptiapp-room-ktx-2.6.1-58 C:\Users\demsa\.gradle\caches\8.9\transforms\a8d17559fc1579c434ea2cfe8a38446a\transformed\room-ktx-2.6.1\res
+com.example.receptiapp-ui-util-release-59 C:\Users\demsa\.gradle\caches\8.9\transforms\a907f5542fdc23f4a81bff7bf6c952a9\transformed\ui-util-release\res
+com.example.receptiapp-lifecycle-viewmodel-savedstate-2.8.3-60 C:\Users\demsa\.gradle\caches\8.9\transforms\aaf39f069c49cfe5bde662fc81b881a6\transformed\lifecycle-viewmodel-savedstate-2.8.3\res
+com.example.receptiapp-core-runtime-2.2.0-61 C:\Users\demsa\.gradle\caches\8.9\transforms\ab9f845f17706ccacbea9a6a97aa37fc\transformed\core-runtime-2.2.0\res
+com.example.receptiapp-animation-core-release-62 C:\Users\demsa\.gradle\caches\8.9\transforms\b2b57c21bbb01d22ed05845feca5b8d2\transformed\animation-core-release\res
+com.example.receptiapp-tracing-1.2.0-63 C:\Users\demsa\.gradle\caches\8.9\transforms\bcf85a0873aa74082ca3739041f389c3\transformed\tracing-1.2.0\res
+com.example.receptiapp-lifecycle-viewmodel-compose-release-64 C:\Users\demsa\.gradle\caches\8.9\transforms\bd65546502b933e81dc6a3db5c6ddb34\transformed\lifecycle-viewmodel-compose-release\res
+com.example.receptiapp-activity-compose-1.9.3-65 C:\Users\demsa\.gradle\caches\8.9\transforms\c23786c959ea220858197135061195d6\transformed\activity-compose-1.9.3\res
+com.example.receptiapp-lifecycle-viewmodel-ktx-2.8.3-66 C:\Users\demsa\.gradle\caches\8.9\transforms\c879f2937c8401cce067fc04790992ce\transformed\lifecycle-viewmodel-ktx-2.8.3\res
+com.example.receptiapp-lifecycle-livedata-2.8.3-67 C:\Users\demsa\.gradle\caches\8.9\transforms\ca73c1f7bdf6c5ac42dfebd405ec0dd8\transformed\lifecycle-livedata-2.8.3\res
+com.example.receptiapp-navigation-runtime-ktx-2.8.5-68 C:\Users\demsa\.gradle\caches\8.9\transforms\cb1fb3578c420cfa373b3a4e6360d3ab\transformed\navigation-runtime-ktx-2.8.5\res
+com.example.receptiapp-material-ripple-release-69 C:\Users\demsa\.gradle\caches\8.9\transforms\cf4399774fa161ec0a56f18ef3afd0cc\transformed\material-ripple-release\res
+com.example.receptiapp-savedstate-1.2.1-70 C:\Users\demsa\.gradle\caches\8.9\transforms\dcd9318ebb0d476267d76170f60e2199\transformed\savedstate-1.2.1\res
+com.example.receptiapp-ui-tooling-data-release-71 C:\Users\demsa\.gradle\caches\8.9\transforms\e1f2adb53247e94c0621bb958e0fc9f9\transformed\ui-tooling-data-release\res
+com.example.receptiapp-runtime-livedata-1.7.6-72 C:\Users\demsa\.gradle\caches\8.9\transforms\e5f0d86b0691f9e9052e52a5f6c93ef5\transformed\runtime-livedata-1.7.6\res
+com.example.receptiapp-ui-test-manifest-1.7.6-73 C:\Users\demsa\.gradle\caches\8.9\transforms\e63087dd5d0c78b99ab5cd504feef8b2\transformed\ui-test-manifest-1.7.6\res
+com.example.receptiapp-recyclerview-1.1.0-74 C:\Users\demsa\.gradle\caches\8.9\transforms\ef49b64826db95d7aa121871c1184316\transformed\recyclerview-1.1.0\res
+com.example.receptiapp-startup-runtime-1.1.1-75 C:\Users\demsa\.gradle\caches\8.9\transforms\ef8b3ca21d314eef940258ff0a39891d\transformed\startup-runtime-1.1.1\res
+com.example.receptiapp-coordinatorlayout-1.1.0-76 C:\Users\demsa\.gradle\caches\8.9\transforms\f8790db27c0c3bc0cb100c990c7b776a\transformed\coordinatorlayout-1.1.0\res
+com.example.receptiapp-ui-release-77 C:\Users\demsa\.gradle\caches\8.9\transforms\ff4af12ab2114e2fdc4d31d01d5a8a74\transformed\ui-release\res
+com.example.receptiapp-pngs-78 C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\build\generated\res\pngs\debug
+com.example.receptiapp-resValues-79 C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\build\generated\res\resValues\debug
+com.example.receptiapp-packageDebugResources-80 C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\build\intermediates\incremental\debug\packageDebugResources\merged.dir
+com.example.receptiapp-packageDebugResources-81 C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\build\intermediates\incremental\debug\packageDebugResources\stripped.dir
+com.example.receptiapp-debug-82 C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\build\intermediates\merged_res\debug\mergeDebugResources
+com.example.receptiapp-debug-83 C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\src\debug\res
+com.example.receptiapp-main-84 C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\src\main\res

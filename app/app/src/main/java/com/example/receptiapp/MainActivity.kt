@@ -21,13 +21,11 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -36,6 +34,9 @@ import org.json.JSONObject
 import java.net.HttpURLConnection
 import java.net.URL
 
+
+private var baza = ""
+
 class MainActivity : ComponentActivity() {
 
     private val TAG = "MainActivityLifecycle"
@@ -43,12 +44,16 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-
+        baza = intent.getStringExtra("BAZA") ?: ""
         setContent {
             ReceptiAppTheme {
                 MainScreen(
                     onSearchClick = { startActivity(Intent(this, SearchActivity::class.java)) },
-                    onSavedClick = { startActivity(Intent(this, SavedActivity::class.java)) }
+                    onSavedClick = {
+                        val intent = Intent(this, MainActivity::class.java)
+                        intent.putExtra("BAZA", "BAZA")
+                        startActivity(intent)
+                    }
                 )
             }
         }
@@ -95,7 +100,11 @@ fun MainScreen(
     val context = LocalContext.current
 
     LaunchedEffect(Unit) {
-        recipes = fetchRecipesData()
+        if (baza.equals("BAZA")) {
+            recipes = loadRecipesFromDatabase()
+        } else {
+            recipes = fetchRecipesData()
+        }
     }
 
     Column(
@@ -203,6 +212,35 @@ fun ReceptiAppTheme(content: @Composable () -> Unit) {
     )
 }
 
+suspend fun loadRecipesFromDatabase(): List<Recipe> {
+    return withContext(Dispatchers.IO) {
+        try {
+            val recipeDao = MyApplication.database.recipeDao()
+            val recipesFromDb = recipeDao.getAllRecipes()
+            recipesFromDb.map { recipe ->
+                Recipe(
+                    name = recipe.name,
+                    ingredients = toListR(recipe.ingredients),
+                    instructions = toListR(recipe.instructions),
+                    prepTime = recipe.prepTime,
+                    cookTime = recipe.cookTime,
+                    difficulty = recipe.difficulty,
+                    image = recipe.image,
+                    mealType = toListR(recipe.mealType)
+                )
+            }
+        } catch (e: Exception) {
+            Log.e("loadRecipesFromDatabase", "Error fetching recipes: ${e.message}")
+            emptyList()
+        }
+    }
+}
+
+fun toListR(value: String): List<String> {
+    return value.split(",").map { it.trim() }
+}
+
+
 suspend fun fetchRecipesData(): List<Recipe> {
     return withContext(Dispatchers.IO) {
         try {
@@ -221,6 +259,7 @@ suspend fun fetchRecipesData(): List<Recipe> {
     }
 }
 
+
 fun parseRecipes(jsonArray: JSONArray): List<Recipe> {
     val recipes = mutableListOf<Recipe>()
     for (i in 0 until jsonArray.length()) {
@@ -233,14 +272,15 @@ fun parseRecipes(jsonArray: JSONArray): List<Recipe> {
                 prepTime = jsonObject.getInt("prepTimeMinutes"),
                 cookTime = jsonObject.getInt("cookTimeMinutes"),
                 difficulty = jsonObject.getString("difficulty"),
-                image = jsonObject.getString("image")
+                image = jsonObject.getString("image"),
+                mealType = jsonObject.getJSONArray("mealType").toList()
             )
         )
     }
     return recipes
 }
 
-private fun JSONArray.toList(): List<String> {
+fun JSONArray.toList(): List<String> {
     return List(length()) { i -> getString(i) }
 }
 
@@ -251,5 +291,6 @@ data class Recipe(
     val prepTime: Int,
     val cookTime: Int,
     val difficulty: String,
-    val image: String
+    val image: String,
+    val mealType: List<String>
 )
