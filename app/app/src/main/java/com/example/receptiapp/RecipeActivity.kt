@@ -48,8 +48,8 @@ class RecipeActivity : ComponentActivity() {
 
 }
 
-public fun saveRecipe(recipeData: String) {
-    val recipe = JSONObject(recipeData).let { json ->
+public fun saveRecipe(recipeData: JSONObject) {
+    recipeData.let { json ->
         Recipe(
             name = json.getString("name"),
             ingredients = json.getJSONArray("ingredients").toList(),
@@ -61,7 +61,6 @@ public fun saveRecipe(recipeData: String) {
             mealType = json.getJSONArray("mealType").toList()
         )
     }
-    //recipeViewModel.saveRecipe(recipe)
 }
 
 @Composable
@@ -73,8 +72,11 @@ fun RecipeScreen(recipeJson: String, onBackClick: () -> Unit) {
     val prepTime = recipe.getInt("prepTimeMinutes")
     val cookTime = recipe.getInt("cookTimeMinutes")
     val difficulty = recipe.getString("difficulty")
-    val imageUrl = recipe.getString("image")
-    val mealType = recipe.getJSONArray("mealType").join("\n")
+    val imageUrl = recipe.getString("imageUrl")
+    val mealType = recipe.getString("mealType")
+        .removeSurrounding("[", "]")
+        .split(",")
+        .map { it.trim() }
 
     Column(
         modifier = Modifier
@@ -129,7 +131,7 @@ fun RecipeScreen(recipeJson: String, onBackClick: () -> Unit) {
             }
 
             IconButton(
-                onClick = { },
+                onClick = {saveRecipe(recipe) },
                 modifier = Modifier
                     .align(Alignment.TopEnd)
                     .padding(10.dp)
@@ -142,15 +144,15 @@ fun RecipeScreen(recipeJson: String, onBackClick: () -> Unit) {
             }
 
             // Meal types displayed in a Row at the bottom left
-            if (recipe.getJSONArray("mealType").length() > 0) {
+            if (mealType.size > 0) {
                 Row(
                     modifier = Modifier
                         .align(Alignment.BottomStart)
                         .padding(start = 10.dp, bottom = 10.dp)
                 ) {
-                    recipe.getJSONArray("mealType").let { mealTypes ->
-                        for (i in 0 until mealTypes.length()) {
-                            val meal = mealTypes.getString(i)
+                    mealType.let { mealTypes ->
+                        for (i in 0 until mealTypes.size) {
+                            val meal = mealTypes[i]
                             Box(
                                 modifier = Modifier
                                     .padding(end = 8.dp)

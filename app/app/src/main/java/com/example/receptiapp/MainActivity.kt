@@ -147,6 +147,9 @@ fun MainScreen(
                                 put("ingredients", JSONArray(recipe.ingredients))
                                 put("prepTimeMinutes", recipe.prepTime.toInt())
                                 put("cookTimeMinutes", recipe.cookTime.toInt())
+                                put("difficulty", recipe.difficulty)
+                                put("imageUrl", recipe.image)
+                                put("mealType", recipe.mealType)
                             }.toString())
                         }
                         context.startActivity(intent)
