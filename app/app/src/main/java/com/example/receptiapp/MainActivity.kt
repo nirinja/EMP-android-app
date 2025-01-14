@@ -41,6 +41,7 @@ import java.net.URL
 
 private var saved = ""
 private var search = ""
+private var searchtemp = ""
 private var filtri = ""
 
 class MainActivity : ComponentActivity() {
@@ -56,7 +57,11 @@ class MainActivity : ComponentActivity() {
         setContent {
             ReceptiAppTheme {
                 MainScreen(
-                    onSearchClick = { startActivity(Intent(this, SearchActivity::class.java)) },
+                    onSearchClick = {
+                        val intent = Intent(this, MainActivity::class.java)
+                        intent.putExtra("SEARCH", searchtemp)
+                        startActivity(intent)
+                    },
                     onSavedClick = {
                         val intent = Intent(this, MainActivity::class.java)
                         intent.putExtra("SAVED", "SAVED")
@@ -159,13 +164,15 @@ fun MainScreen(
             // Filters Row: Meal Type and Difficulty Dropdowns
             Row(
                 horizontalArrangement = Arrangement.spacedBy(16.dp),
+                verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(bottom = 16.dp)
             ) {
-                // Meal Type Dropdown
-                FilterDropdown(
-                    label = selectedMealType,
+                // Meal Type Filter
+                FilterWithLabel(
+                    label = "Meal type:",
+                    dropdownLabel = selectedMealType,
                     options = mealTypes,
                     dropdownExpanded = mealTypeDropdownExpanded,
                     onDropdownToggle = { mealTypeDropdownExpanded = it },
@@ -175,9 +182,10 @@ fun MainScreen(
                     }
                 )
 
-                // Difficulty Dropdown
-                FilterDropdown(
-                    label = selectedDifficulty,
+                // Difficulty Filter
+                FilterWithLabel(
+                    label = "Difficulty:",
+                    dropdownLabel = selectedDifficulty,
                     options = difficulties,
                     dropdownExpanded = difficultyDropdownExpanded,
                     onDropdownToggle = { difficultyDropdownExpanded = it },
@@ -187,7 +195,7 @@ fun MainScreen(
                     }
                 )
             }
-
+            searchtemp = searchQuery;
             // Recipes Grid
             LazyVerticalGrid(
                 columns = GridCells.Fixed(2),
@@ -198,7 +206,10 @@ fun MainScreen(
                 items(
                     recipes.filter {
                         (selectedMealType == "All" || it.mealType.contains(selectedMealType)) &&
-                                (selectedDifficulty == "All" || it.difficulty.equals(selectedDifficulty, ignoreCase = true)) &&
+                                (selectedDifficulty == "All" || it.difficulty.equals(
+                                    selectedDifficulty,
+                                    ignoreCase = true
+                                )) &&
                                 it.name.contains(searchQuery, ignoreCase = true)
                     }
                 ) { recipe ->
@@ -227,6 +238,39 @@ fun MainScreen(
 }
 
 @Composable
+fun FilterWithLabel(
+    label: String,
+    dropdownLabel: String,
+    options: List<String>,
+    dropdownExpanded: Boolean,
+    onDropdownToggle: (Boolean) -> Unit,
+    onOptionSelected: (String) -> Unit
+) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier
+            .padding(start = 4.dp, top = 6.dp)
+    ) {
+        Text(
+            text = label,
+            style = TextStyle(
+                fontSize = 16.sp,
+                fontWeight = FontWeight.SemiBold,
+                color = MaterialTheme.colorScheme.onSurface
+            ),
+            modifier = Modifier.padding(end = 8.dp)
+        )
+        FilterDropdown(
+            label = dropdownLabel,
+            options = options,
+            dropdownExpanded = dropdownExpanded,
+            onDropdownToggle = onDropdownToggle,
+            onOptionSelected = onOptionSelected
+        )
+    }
+}
+
+@Composable
 fun FilterDropdown(
     label: String,
     options: List<String>,
@@ -237,23 +281,23 @@ fun FilterDropdown(
     Box(
         modifier = Modifier
             .background(
-                color = MaterialTheme.colorScheme.surface,
-                shape = RoundedCornerShape(8.dp)
+                color = Color.LightGray.copy(alpha = 0.2f),
+                shape = RoundedCornerShape(6.dp)
             )
             .border(
                 width = 1.dp,
-                color = MaterialTheme.colorScheme.primary,
-                shape = RoundedCornerShape(8.dp)
+                color = Color.Black,
+                shape = RoundedCornerShape(6.dp)
             )
             .clickable { onDropdownToggle(true) }
-            .padding(horizontal = 16.dp, vertical = 12.dp)
+            .padding(horizontal = 8.dp, vertical = 6.dp)
     ) {
         Text(
             text = label,
             style = TextStyle(
-                color = MaterialTheme.colorScheme.onSurface,
+                color = Color.Black,
                 fontSize = 16.sp,
-                fontWeight = FontWeight.Medium
+                fontWeight = FontWeight.Normal
             )
         )
 
@@ -281,63 +325,33 @@ fun FilterDropdown(
     }
 }
 
-@Composable
-fun FilterChip(
-    label: String,
-    isSelected: Boolean,
-    onClick: () -> Unit
-) {
-    Box(
-        modifier = Modifier
-            .border(
-                width = 1.dp,
-                color = if (isSelected) MaterialTheme.colorScheme.primary else Color.Gray,
-                shape = RoundedCornerShape(16.dp)
-            )
-            .background(
-                color = if (isSelected) MaterialTheme.colorScheme.primary.copy(alpha = 0.2f) else Color.Transparent,
-                shape = RoundedCornerShape(16.dp)
-            )
-            .clickable { onClick() }
-            .padding(horizontal = 12.dp, vertical = 8.dp)
-    ) {
-        Text(
-            text = label,
-            style = TextStyle(
-                color = if (isSelected) MaterialTheme.colorScheme.primary else Color.Black,
-                fontWeight = FontWeight.SemiBold,
-                fontSize = 14.sp
-            )
-        )
-    }
-}
 
 @Composable
 fun BottomMenuBar(onSavedClick: () -> Unit) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(35.dp) // Thinner height for the bar
-            .padding(horizontal = 16.dp) // Add spacing around the bar
-            .offset(y = (-60).dp)
-            .shadow(8.dp, RoundedCornerShape(16.dp)) // Shadow and rounded corners
-            .background(
-                color = Color.Black.copy(alpha = 0.6f),
-                shape = RoundedCornerShape(16.dp) // Rounded corners
-            )
+            .height(80.dp) // Height of the bar
+            .padding(horizontal = 16.dp) // Spacing from the sides
+            .offset(y = (-80).dp) // Adjust position
     ) {
         IconButton(
             onClick = onSavedClick,
             modifier = Modifier
-                .align(Alignment.CenterEnd) // Align the icon to the right
-                .padding(end = 16.dp)
+                .align(Alignment.CenterEnd) // Align to the bottom-right
+                .padding(end = 30.dp) // Spacing from the right edge
+                .shadow(8.dp, RoundedCornerShape(50.dp)) // Shadow effect
+                .background(
+                    color = Color.Red.copy(alpha = 0.8f),
+                    shape = RoundedCornerShape(50.dp) // Circular background
+                )
+                .size(70.dp) // Increase size of the button to make the circle bigger
         ) {
             Icon(
                 painter = painterResource(id = R.drawable.saved),
                 contentDescription = "Saved Recipes",
-                tint = MaterialTheme.colorScheme.onPrimary
-
-
+                tint = MaterialTheme.colorScheme.onPrimary,
+                modifier = Modifier.size(30.dp) // icon size the same
             )
         }
     }
