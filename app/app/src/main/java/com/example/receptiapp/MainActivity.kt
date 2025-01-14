@@ -138,12 +138,12 @@ fun MainScreen(
         bottomBar = {
             BottomMenuBar(onSavedClick = onSavedClick)
         }
-    ) { paddingValues ->
+    ) { paddingValues -> // paddingValues je parameter, ki ga Scaffold posreduje
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(paddingValues)
-                .padding(16.dp)
+                .padding(paddingValues) // Uporabi paddingValues za dinamično prilagoditev vsebine
+                .padding(16.dp) // Dodaten padding za notranji odmik
         ) {
             // Search Bar
             OutlinedTextField(
