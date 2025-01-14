@@ -1,6 +1,7 @@
 R_DEF: Internal format may change without notice
 local
 color black
+color ic_launcher_background
 color white
 drawable cas_priprave
 drawable ic_launcher_background
@@ -58,6 +59,7 @@ layout activity_saved
 layout activity_search
 layout item_recipe
 mipmap ic_launcher
+mipmap ic_launcher_foreground
 mipmap ic_launcher_round
 string app_name
 style Base.Theme.ReceptiApp
