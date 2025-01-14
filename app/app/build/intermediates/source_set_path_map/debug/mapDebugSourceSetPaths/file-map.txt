@@ -76,10 +76,10 @@ com.example.receptiapp-recyclerview-1.1.0-74 C:\Users\demsa\.gradle\caches\8.9\t
 com.example.receptiapp-startup-runtime-1.1.1-75 C:\Users\demsa\.gradle\caches\8.9\transforms\ef8b3ca21d314eef940258ff0a39891d\transformed\startup-runtime-1.1.1\res
 com.example.receptiapp-coordinatorlayout-1.1.0-76 C:\Users\demsa\.gradle\caches\8.9\transforms\f8790db27c0c3bc0cb100c990c7b776a\transformed\coordinatorlayout-1.1.0\res
 com.example.receptiapp-ui-release-77 C:\Users\demsa\.gradle\caches\8.9\transforms\ff4af12ab2114e2fdc4d31d01d5a8a74\transformed\ui-release\res
-com.example.receptiapp-pngs-78 C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\build\generated\res\pngs\debug
-com.example.receptiapp-resValues-79 C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\build\generated\res\resValues\debug
-com.example.receptiapp-packageDebugResources-80 C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\build\intermediates\incremental\debug\packageDebugResources\merged.dir
-com.example.receptiapp-packageDebugResources-81 C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\build\intermediates\incremental\debug\packageDebugResources\stripped.dir
-com.example.receptiapp-debug-82 C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\build\intermediates\merged_res\debug\mergeDebugResources
-com.example.receptiapp-debug-83 C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\src\debug\res
-com.example.receptiapp-main-84 C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\src\main\res
+com.example.receptiapp-pngs-78 C:\Users\demsa\Desktop\EMP-android-app\app\app\build\generated\res\pngs\debug
+com.example.receptiapp-resValues-79 C:\Users\demsa\Desktop\EMP-android-app\app\app\build\generated\res\resValues\debug
+com.example.receptiapp-packageDebugResources-80 C:\Users\demsa\Desktop\EMP-android-app\app\app\build\intermediates\incremental\debug\packageDebugResources\merged.dir
+com.example.receptiapp-packageDebugResources-81 C:\Users\demsa\Desktop\EMP-android-app\app\app\build\intermediates\incremental\debug\packageDebugResources\stripped.dir
+com.example.receptiapp-debug-82 C:\Users\demsa\Desktop\EMP-android-app\app\app\build\intermediates\merged_res\debug\mergeDebugResources
+com.example.receptiapp-debug-83 C:\Users\demsa\Desktop\EMP-android-app\app\app\src\debug\res
+com.example.receptiapp-main-84 C:\Users\demsa\Desktop\EMP-android-app\app\app\src\main\res

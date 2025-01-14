@@ -32,7 +32,7 @@ com.example.receptiapp.test.app-ui-test-junit4-release-30 C:\Users\demsa\.gradle
 com.example.receptiapp.test.app-savedstate-1.2.1-31 C:\Users\demsa\.gradle\caches\8.9\transforms\dcd9318ebb0d476267d76170f60e2199\transformed\savedstate-1.2.1\res
 com.example.receptiapp.test.app-startup-runtime-1.1.1-32 C:\Users\demsa\.gradle\caches\8.9\transforms\ef8b3ca21d314eef940258ff0a39891d\transformed\startup-runtime-1.1.1\res
 com.example.receptiapp.test.app-ui-release-33 C:\Users\demsa\.gradle\caches\8.9\transforms\ff4af12ab2114e2fdc4d31d01d5a8a74\transformed\ui-release\res
-com.example.receptiapp.test.app-androidTest-34 C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\build\generated\res\resValues\androidTest\debug
-com.example.receptiapp.test.app-mergeDebugAndroidTestResources-35 C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\merged.dir
-com.example.receptiapp.test.app-mergeDebugAndroidTestResources-36 C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\stripped.dir
-com.example.receptiapp.test.app-debugAndroidTest-37 C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\build\intermediates\merged_res\debugAndroidTest\mergeDebugAndroidTestResources
+com.example.receptiapp.test.app-androidTest-34 C:\Users\demsa\Desktop\EMP-android-app\app\app\build\generated\res\resValues\androidTest\debug
+com.example.receptiapp.test.app-mergeDebugAndroidTestResources-35 C:\Users\demsa\Desktop\EMP-android-app\app\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\merged.dir
+com.example.receptiapp.test.app-mergeDebugAndroidTestResources-36 C:\Users\demsa\Desktop\EMP-android-app\app\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\stripped.dir
+com.example.receptiapp.test.app-debugAndroidTest-37 C:\Users\demsa\Desktop\EMP-android-app\app\app\build\intermediates\merged_res\debugAndroidTest\mergeDebugAndroidTestResources

@@ -34,19 +34,7 @@
         android:theme="@style/Theme.ReceptiApp"
         android:usesCleartextTraffic="true" >
         <activity
-            android:name="com.example.receptiapp.LightSensorActivity"
-            android:exported="false" />
-        <activity
             android:name="com.example.receptiapp.RecipeActivity"
-            android:exported="false" />
-        <activity
-            android:name="com.example.receptiapp.SavedActivity"
-            android:exported="false" />
-        <activity
-            android:name="com.example.receptiapp.ResultsActivity"
-            android:exported="false" />
-        <activity
-            android:name="com.example.receptiapp.SearchActivity"
             android:exported="false" />
         <activity
             android:name="com.example.receptiapp.MainActivity"

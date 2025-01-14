@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\src\main\AndroidManifest.xml:2:1-48:12
-INJECTED from C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\src\main\AndroidManifest.xml:2:1-48:12
-INJECTED from C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\src\main\AndroidManifest.xml:2:1-48:12
-INJECTED from C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\src\main\AndroidManifest.xml:2:1-48:12
+ADDED from C:\Users\demsa\Desktop\EMP-android-app\app\app\src\main\AndroidManifest.xml:2:1-36:12
+INJECTED from C:\Users\demsa\Desktop\EMP-android-app\app\app\src\main\AndroidManifest.xml:2:1-36:12
+INJECTED from C:\Users\demsa\Desktop\EMP-android-app\app\app\src\main\AndroidManifest.xml:2:1-36:12
+INJECTED from C:\Users\demsa\Desktop\EMP-android-app\app\app\src\main\AndroidManifest.xml:2:1-36:12
 MERGED from [androidx.databinding:viewbinding:8.7.1] C:\Users\demsa\.gradle\caches\8.9\transforms\b29e752d1bc61253118cc3089717be8d\transformed\viewbinding-8.7.1\AndroidManifest.xml:2:1-7:12
 MERGED from [io.coil-kt:coil-compose:2.3.0] C:\Users\demsa\.gradle\caches\8.9\transforms\b1f027bc06ce75a6a7dd342abf54c913\transformed\coil-compose-2.3.0\AndroidManifest.xml:2:1-7:12
 MERGED from [io.coil-kt:coil-compose-base:2.3.0] C:\Users\demsa\.gradle\caches\8.9\transforms\baa4f84e20845a0203acc789785e78e1\transformed\coil-compose-base-2.3.0\AndroidManifest.xml:2:1-7:12
@@ -104,26 +104,26 @@ MERGED from [androidx.exifinterface:exifinterface:1.3.6] C:\Users\demsa\.gradle\
 MERGED from [androidx.window.extensions.core:core:1.0.0] C:\Users\demsa\.gradle\caches\8.9\transforms\4aafc507959baf55a97d5ebec2ea20e7\transformed\core-1.0.0\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.annotation:annotation-experimental:1.4.1] C:\Users\demsa\.gradle\caches\8.9\transforms\6b10a7402d7c22ce93883f13dfe722aa\transformed\annotation-experimental-1.4.1\AndroidManifest.xml:2:1-7:12
 	package
-		INJECTED from C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\demsa\Desktop\EMP-android-app\app\app\src\main\AndroidManifest.xml
 	android:versionName
-		INJECTED from C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\demsa\Desktop\EMP-android-app\app\app\src\main\AndroidManifest.xml
 	xmlns:tools
-		ADDED from C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\src\main\AndroidManifest.xml:3:5-51
+		ADDED from C:\Users\demsa\Desktop\EMP-android-app\app\app\src\main\AndroidManifest.xml:3:5-51
 	android:versionCode
-		INJECTED from C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\demsa\Desktop\EMP-android-app\app\app\src\main\AndroidManifest.xml
 	xmlns:android
-		ADDED from C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\src\main\AndroidManifest.xml:2:11-69
+		ADDED from C:\Users\demsa\Desktop\EMP-android-app\app\app\src\main\AndroidManifest.xml:2:11-69
 uses-permission#android.permission.INTERNET
-ADDED from C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\src\main\AndroidManifest.xml:5:5-67
+ADDED from C:\Users\demsa\Desktop\EMP-android-app\app\app\src\main\AndroidManifest.xml:5:5-67
 	android:name
-		ADDED from C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\src\main\AndroidManifest.xml:5:22-64
+		ADDED from C:\Users\demsa\Desktop\EMP-android-app\app\app\src\main\AndroidManifest.xml:5:22-64
 uses-permission#android.permission.BODY_SENSORS
-ADDED from C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\src\main\AndroidManifest.xml:6:5-71
+ADDED from C:\Users\demsa\Desktop\EMP-android-app\app\app\src\main\AndroidManifest.xml:6:5-71
 	android:name
-		ADDED from C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\src\main\AndroidManifest.xml:6:22-68
+		ADDED from C:\Users\demsa\Desktop\EMP-android-app\app\app\src\main\AndroidManifest.xml:6:22-68
 application
-ADDED from C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\src\main\AndroidManifest.xml:9:5-46:19
-INJECTED from C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\src\main\AndroidManifest.xml:9:5-46:19
+ADDED from C:\Users\demsa\Desktop\EMP-android-app\app\app\src\main\AndroidManifest.xml:9:5-34:19
+INJECTED from C:\Users\demsa\Desktop\EMP-android-app\app\app\src\main\AndroidManifest.xml:9:5-34:19
 MERGED from [com.google.android.material:material:1.12.0] C:\Users\demsa\.gradle\caches\8.9\transforms\18d7341169c30ddf2463fa3a492a06c7\transformed\material-1.12.0\AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.12.0] C:\Users\demsa\.gradle\caches\8.9\transforms\18d7341169c30ddf2463fa3a492a06c7\transformed\material-1.12.0\AndroidManifest.xml:22:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.2.0] C:\Users\demsa\.gradle\caches\8.9\transforms\3f65732989594c5dbf3379a97cc2cd1b\transformed\constraintlayout-2.2.0\AndroidManifest.xml:7:5-20
@@ -149,83 +149,59 @@ MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\demsa\.gradle\cach
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\demsa\.gradle\caches\8.9\transforms\0b19bffa78969990a064e4897951e985\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:24:5-25:19
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\demsa\.gradle\caches\8.9\transforms\0b19bffa78969990a064e4897951e985\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:24:5-25:19
 	android:extractNativeLibs
-		INJECTED from C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\demsa\Desktop\EMP-android-app\app\app\src\main\AndroidManifest.xml
 	android:roundIcon
-		ADDED from C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\src\main\AndroidManifest.xml:17:9-54
+		ADDED from C:\Users\demsa\Desktop\EMP-android-app\app\app\src\main\AndroidManifest.xml:17:9-54
 	android:icon
-		ADDED from C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\src\main\AndroidManifest.xml:14:9-43
+		ADDED from C:\Users\demsa\Desktop\EMP-android-app\app\app\src\main\AndroidManifest.xml:14:9-43
 	android:networkSecurityConfig
-		ADDED from C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\src\main\AndroidManifest.xml:16:9-69
+		ADDED from C:\Users\demsa\Desktop\EMP-android-app\app\app\src\main\AndroidManifest.xml:16:9-69
 	android:appComponentFactory
 		ADDED from [androidx.core:core:1.15.0] C:\Users\demsa\.gradle\caches\8.9\transforms\17ae6ff7ae932606c319c6753f3f8e56\transformed\core-1.15.0\AndroidManifest.xml:28:18-86
 	android:supportsRtl
-		ADDED from C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\src\main\AndroidManifest.xml:18:9-35
+		ADDED from C:\Users\demsa\Desktop\EMP-android-app\app\app\src\main\AndroidManifest.xml:18:9-35
 	android:label
-		ADDED from C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\src\main\AndroidManifest.xml:15:9-41
+		ADDED from C:\Users\demsa\Desktop\EMP-android-app\app\app\src\main\AndroidManifest.xml:15:9-41
 	android:fullBackupContent
-		ADDED from C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\src\main\AndroidManifest.xml:13:9-54
+		ADDED from C:\Users\demsa\Desktop\EMP-android-app\app\app\src\main\AndroidManifest.xml:13:9-54
 	tools:targetApi
-		ADDED from C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\src\main\AndroidManifest.xml:21:9-29
+		ADDED from C:\Users\demsa\Desktop\EMP-android-app\app\app\src\main\AndroidManifest.xml:21:9-29
 	android:allowBackup
-		ADDED from C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\src\main\AndroidManifest.xml:11:9-35
+		ADDED from C:\Users\demsa\Desktop\EMP-android-app\app\app\src\main\AndroidManifest.xml:11:9-35
 	android:theme
-		ADDED from C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\src\main\AndroidManifest.xml:19:9-48
+		ADDED from C:\Users\demsa\Desktop\EMP-android-app\app\app\src\main\AndroidManifest.xml:19:9-48
 	android:dataExtractionRules
-		ADDED from C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\src\main\AndroidManifest.xml:12:9-65
+		ADDED from C:\Users\demsa\Desktop\EMP-android-app\app\app\src\main\AndroidManifest.xml:12:9-65
 	android:usesCleartextTraffic
-		ADDED from C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\src\main\AndroidManifest.xml:20:9-44
+		ADDED from C:\Users\demsa\Desktop\EMP-android-app\app\app\src\main\AndroidManifest.xml:20:9-44
 	android:name
-		ADDED from C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\src\main\AndroidManifest.xml:10:9-38
-activity#com.example.receptiapp.LightSensorActivity
-ADDED from C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\src\main\AndroidManifest.xml:22:9-24:40
-	android:exported
-		ADDED from C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\src\main\AndroidManifest.xml:24:13-37
-	android:name
-		ADDED from C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\src\main\AndroidManifest.xml:23:13-48
+		ADDED from C:\Users\demsa\Desktop\EMP-android-app\app\app\src\main\AndroidManifest.xml:10:9-38
 activity#com.example.receptiapp.RecipeActivity
-ADDED from C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\src\main\AndroidManifest.xml:25:9-27:40
+ADDED from C:\Users\demsa\Desktop\EMP-android-app\app\app\src\main\AndroidManifest.xml:22:9-24:40
 	android:exported
-		ADDED from C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\src\main\AndroidManifest.xml:27:13-37
+		ADDED from C:\Users\demsa\Desktop\EMP-android-app\app\app\src\main\AndroidManifest.xml:24:13-37
 	android:name
-		ADDED from C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\src\main\AndroidManifest.xml:26:13-43
-activity#com.example.receptiapp.SavedActivity
-ADDED from C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\src\main\AndroidManifest.xml:28:9-30:40
-	android:exported
-		ADDED from C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\src\main\AndroidManifest.xml:30:13-37
-	android:name
-		ADDED from C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\src\main\AndroidManifest.xml:29:13-42
-activity#com.example.receptiapp.ResultsActivity
-ADDED from C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\src\main\AndroidManifest.xml:31:9-33:40
-	android:exported
-		ADDED from C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\src\main\AndroidManifest.xml:33:13-37
-	android:name
-		ADDED from C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\src\main\AndroidManifest.xml:32:13-44
-activity#com.example.receptiapp.SearchActivity
-ADDED from C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\src\main\AndroidManifest.xml:34:9-36:40
-	android:exported
-		ADDED from C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\src\main\AndroidManifest.xml:36:13-37
-	android:name
-		ADDED from C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\src\main\AndroidManifest.xml:35:13-43
+		ADDED from C:\Users\demsa\Desktop\EMP-android-app\app\app\src\main\AndroidManifest.xml:23:13-43
 activity#com.example.receptiapp.MainActivity
-ADDED from C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\src\main\AndroidManifest.xml:37:9-45:20
+ADDED from C:\Users\demsa\Desktop\EMP-android-app\app\app\src\main\AndroidManifest.xml:25:9-33:20
 	android:exported
-		ADDED from C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\src\main\AndroidManifest.xml:39:13-36
+		ADDED from C:\Users\demsa\Desktop\EMP-android-app\app\app\src\main\AndroidManifest.xml:27:13-36
 	android:name
-		ADDED from C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\src\main\AndroidManifest.xml:38:13-41
+		ADDED from C:\Users\demsa\Desktop\EMP-android-app\app\app\src\main\AndroidManifest.xml:26:13-41
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\src\main\AndroidManifest.xml:40:13-44:29
+ADDED from C:\Users\demsa\Desktop\EMP-android-app\app\app\src\main\AndroidManifest.xml:28:13-32:29
 action#android.intent.action.MAIN
-ADDED from C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\src\main\AndroidManifest.xml:41:17-69
+ADDED from C:\Users\demsa\Desktop\EMP-android-app\app\app\src\main\AndroidManifest.xml:29:17-69
 	android:name
-		ADDED from C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\src\main\AndroidManifest.xml:41:25-66
+		ADDED from C:\Users\demsa\Desktop\EMP-android-app\app\app\src\main\AndroidManifest.xml:29:25-66
 category#android.intent.category.LAUNCHER
-ADDED from C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\src\main\AndroidManifest.xml:43:17-77
+ADDED from C:\Users\demsa\Desktop\EMP-android-app\app\app\src\main\AndroidManifest.xml:31:17-77
 	android:name
-		ADDED from C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\src\main\AndroidManifest.xml:43:27-74
+		ADDED from C:\Users\demsa\Desktop\EMP-android-app\app\app\src\main\AndroidManifest.xml:31:27-74
 uses-sdk
-INJECTED from C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
-INJECTED from C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\src\main\AndroidManifest.xml
-INJECTED from C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\src\main\AndroidManifest.xml
+INJECTED from C:\Users\demsa\Desktop\EMP-android-app\app\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from C:\Users\demsa\Desktop\EMP-android-app\app\app\src\main\AndroidManifest.xml
+INJECTED from C:\Users\demsa\Desktop\EMP-android-app\app\app\src\main\AndroidManifest.xml
 MERGED from [androidx.databinding:viewbinding:8.7.1] C:\Users\demsa\.gradle\caches\8.9\transforms\b29e752d1bc61253118cc3089717be8d\transformed\viewbinding-8.7.1\AndroidManifest.xml:5:5-44
 MERGED from [androidx.databinding:viewbinding:8.7.1] C:\Users\demsa\.gradle\caches\8.9\transforms\b29e752d1bc61253118cc3089717be8d\transformed\viewbinding-8.7.1\AndroidManifest.xml:5:5-44
 MERGED from [io.coil-kt:coil-compose:2.3.0] C:\Users\demsa\.gradle\caches\8.9\transforms\b1f027bc06ce75a6a7dd342abf54c913\transformed\coil-compose-2.3.0\AndroidManifest.xml:5:5-44
@@ -425,11 +401,11 @@ MERGED from [androidx.window.extensions.core:core:1.0.0] C:\Users\demsa\.gradle\
 MERGED from [androidx.annotation:annotation-experimental:1.4.1] C:\Users\demsa\.gradle\caches\8.9\transforms\6b10a7402d7c22ce93883f13dfe722aa\transformed\annotation-experimental-1.4.1\AndroidManifest.xml:5:5-44
 MERGED from [androidx.annotation:annotation-experimental:1.4.1] C:\Users\demsa\.gradle\caches\8.9\transforms\6b10a7402d7c22ce93883f13dfe722aa\transformed\annotation-experimental-1.4.1\AndroidManifest.xml:5:5-44
 	android:targetSdkVersion
-		INJECTED from C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\demsa\Desktop\EMP-android-app\app\app\src\main\AndroidManifest.xml
 	tools:ignore
 		ADDED from [com.google.accompanist:accompanist-drawablepainter:0.30.0] C:\Users\demsa\.gradle\caches\8.9\transforms\b9e914bb30e138ce2ba98116ac9f81ef\transformed\accompanist-drawablepainter-0.30.0\AndroidManifest.xml:23:9-39
 	android:minSdkVersion
-		INJECTED from C:\Users\demsa\Desktop\elektronsko poslovanje\EMP-android-app\app\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\demsa\Desktop\EMP-android-app\app\app\src\main\AndroidManifest.xml
 activity#androidx.activity.ComponentActivity
 ADDED from [androidx.compose.ui:ui-test-manifest:1.7.6] C:\Users\demsa\.gradle\caches\8.9\transforms\e63087dd5d0c78b99ab5cd504feef8b2\transformed\ui-test-manifest-1.7.6\AndroidManifest.xml:23:9-25:39
 	android:exported

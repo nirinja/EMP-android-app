@@ -20,19 +20,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".LightSensorActivity"
-            android:exported="false" />
-        <activity
             android:name=".RecipeActivity"
-            android:exported="false" />
-        <activity
-            android:name=".SavedActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ResultsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".SearchActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
