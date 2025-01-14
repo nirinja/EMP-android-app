@@ -81,14 +81,15 @@ class SearchActivity : AppCompatActivity() {
             val iskanoText = iskano.text.toString()
             val inputText = sestavine.text.toString()
 
-            val intent = Intent(this@SearchActivity, ResultsActivity::class.java)
-            intent.putExtra("iskano", iskanoText)
-            intent.putExtra("sestavine", inputText)
+            val intent = Intent(this@SearchActivity, MainActivity::class.java)
+            intent.putExtra("SEARCH", iskanoText)
+            intent.putExtra("FILTRI", inputText)
             startActivity(intent)
         }
 
         binding.savedBtn.setOnClickListener {
-            val intent = Intent(this@SearchActivity, SavedActivity::class.java)
+            val intent = Intent(this@SearchActivity, MainActivity::class.java)
+            intent.putExtra("SAVED", "SAVED")
             startActivity(intent)
         }
     }

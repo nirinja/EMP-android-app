@@ -35,7 +35,9 @@ import java.net.HttpURLConnection
 import java.net.URL
 
 
-private var baza = ""
+private var saved = ""
+private var search = ""
+private var filtri = ""
 
 class MainActivity : ComponentActivity() {
 
@@ -44,14 +46,16 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        baza = intent.getStringExtra("BAZA") ?: ""
+        saved = intent.getStringExtra("SAVED") ?: ""
+        search = intent.getStringExtra("SEARCH") ?: ""
+        filtri = intent.getStringExtra("FILTRI") ?: ""
         setContent {
             ReceptiAppTheme {
                 MainScreen(
                     onSearchClick = { startActivity(Intent(this, SearchActivity::class.java)) },
                     onSavedClick = {
                         val intent = Intent(this, MainActivity::class.java)
-                        intent.putExtra("BAZA", "BAZA")
+                        intent.putExtra("SAVED", "SAVED")
                         startActivity(intent)
                     }
                 )
@@ -100,7 +104,7 @@ fun MainScreen(
     val context = LocalContext.current
 
     LaunchedEffect(Unit) {
-        if (baza.equals("BAZA")) {
+        if (saved.equals("SAVED")) {
             recipes = loadRecipesFromDatabase()
         } else {
             recipes = fetchRecipesData()
@@ -244,7 +248,7 @@ fun toListR(value: String): List<String> {
 suspend fun fetchRecipesData(): List<Recipe> {
     return withContext(Dispatchers.IO) {
         try {
-            val url = URL("https://dummyjson.com/recipes")
+            val url = URL("https://dummyjson.com/recipes/search?q=$search")
             val connection = url.openConnection() as HttpURLConnection
             connection.connect()
             if (connection.responseCode == 200) {
