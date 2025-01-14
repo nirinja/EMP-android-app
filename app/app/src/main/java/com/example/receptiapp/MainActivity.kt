@@ -42,7 +42,6 @@ import java.net.URL
 private var saved = ""
 private var search = ""
 private var searchtemp = ""
-private var filtri = ""
 
 class MainActivity : ComponentActivity() {
 
@@ -53,7 +52,10 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         saved = intent.getStringExtra("SAVED") ?: ""
         search = intent.getStringExtra("SEARCH") ?: ""
-        filtri = intent.getStringExtra("FILTRI") ?: ""
+
+        val intent = Intent(this, LightSensorActivity::class.java)
+        startActivity(intent)
+
         setContent {
             ReceptiAppTheme {
                 MainScreen(
@@ -103,6 +105,8 @@ class MainActivity : ComponentActivity() {
         Log.d(TAG, "onDestroy() called")
     }
 }
+
+
 
 
 // Fixes applied to MainScreen and DropdownMenuItem usage

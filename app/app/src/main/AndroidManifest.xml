@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.BODY_SENSORS" />
+
 
     <application
         android:name=".MyApplication"
@@ -17,6 +19,9 @@
         android:theme="@style/Theme.ReceptiApp"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:name=".LightSensorActivity"
+            android:exported="false" />
         <activity
             android:name=".RecipeActivity"
             android:exported="false" />

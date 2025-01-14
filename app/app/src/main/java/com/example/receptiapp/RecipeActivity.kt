@@ -179,7 +179,7 @@ fun RecipeScreen(recipeJson: String, onBackClick: () -> Unit) {
         )
 
         Text(
-            text = "Preparation: $prepTime min | Difficulty: $difficulty",
+            text = "Preparation: $prepTime min | Cook time: $cookTime | Difficulty: $difficulty",
             style = MaterialTheme.typography.bodyMedium,
             modifier = Modifier.padding(vertical = 8.dp)
         )
