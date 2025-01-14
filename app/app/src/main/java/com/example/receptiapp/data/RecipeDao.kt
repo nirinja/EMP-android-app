@@ -27,4 +27,7 @@ interface RecipeDao {
     @Query("SELECT * FROM recipes WHERE name = :name LIMIT 1")
     suspend fun getRecipeByName(name: String): Recipe?
 
+    @Query("DELETE FROM recipes WHERE name = :name")
+    suspend fun deleteRecipeByName(name: String)
+
 }

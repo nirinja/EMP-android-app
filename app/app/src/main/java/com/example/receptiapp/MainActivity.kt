@@ -10,6 +10,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -99,6 +100,7 @@ class MainActivity : ComponentActivity() {
 }
 
 
+// Fixes applied to MainScreen and DropdownMenuItem usage
 @Composable
 fun MainScreen(
     onSearchClick: (String) -> Unit,
@@ -106,7 +108,14 @@ fun MainScreen(
 ) {
     var recipes by remember { mutableStateOf<List<Recipe>>(emptyList()) }
     var searchQuery by remember { mutableStateOf("") }
+    var selectedMealType by remember { mutableStateOf("All") }
+    var selectedDifficulty by remember { mutableStateOf("All") }
+    var mealTypeDropdownExpanded by remember { mutableStateOf(false) }
+    var difficultyDropdownExpanded by remember { mutableStateOf(false) }
     val context = LocalContext.current
+
+    val mealTypes = listOf("All", "Dinner", "Snack", "Breakfast", "Lunch", "Dessert")
+    val difficulties = listOf("All", "Easy", "Medium", "Hard")
 
     LaunchedEffect(Unit) {
         if (saved.equals("SAVED")) {
@@ -134,7 +143,7 @@ fun MainScreen(
                 placeholder = { Text("Search recipes...") },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(bottom = 16.dp),
+                    .padding(bottom = 8.dp),
                 shape = RoundedCornerShape(8.dp),
                 singleLine = true,
                 trailingIcon = {
@@ -147,6 +156,38 @@ fun MainScreen(
                 }
             )
 
+            // Filters Row: Meal Type and Difficulty Dropdowns
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(16.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 16.dp)
+            ) {
+                // Meal Type Dropdown
+                FilterDropdown(
+                    label = selectedMealType,
+                    options = mealTypes,
+                    dropdownExpanded = mealTypeDropdownExpanded,
+                    onDropdownToggle = { mealTypeDropdownExpanded = it },
+                    onOptionSelected = {
+                        selectedMealType = it
+                        mealTypeDropdownExpanded = false
+                    }
+                )
+
+                // Difficulty Dropdown
+                FilterDropdown(
+                    label = selectedDifficulty,
+                    options = difficulties,
+                    dropdownExpanded = difficultyDropdownExpanded,
+                    onDropdownToggle = { difficultyDropdownExpanded = it },
+                    onOptionSelected = {
+                        selectedDifficulty = it
+                        difficultyDropdownExpanded = false
+                    }
+                )
+            }
+
             // Recipes Grid
             LazyVerticalGrid(
                 columns = GridCells.Fixed(2),
@@ -154,7 +195,13 @@ fun MainScreen(
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
                 modifier = Modifier.fillMaxSize()
             ) {
-                items(recipes.filter { it.name.contains(searchQuery, ignoreCase = true) }) { recipe ->
+                items(
+                    recipes.filter {
+                        (selectedMealType == "All" || it.mealType.contains(selectedMealType)) &&
+                                (selectedDifficulty == "All" || it.difficulty.equals(selectedDifficulty, ignoreCase = true)) &&
+                                it.name.contains(searchQuery, ignoreCase = true)
+                    }
+                ) { recipe ->
                     RecipeItem(
                         recipe = recipe,
                         onClick = {
@@ -176,6 +223,92 @@ fun MainScreen(
                 }
             }
         }
+    }
+}
+
+@Composable
+fun FilterDropdown(
+    label: String,
+    options: List<String>,
+    dropdownExpanded: Boolean,
+    onDropdownToggle: (Boolean) -> Unit,
+    onOptionSelected: (String) -> Unit
+) {
+    Box(
+        modifier = Modifier
+            .background(
+                color = MaterialTheme.colorScheme.surface,
+                shape = RoundedCornerShape(8.dp)
+            )
+            .border(
+                width = 1.dp,
+                color = MaterialTheme.colorScheme.primary,
+                shape = RoundedCornerShape(8.dp)
+            )
+            .clickable { onDropdownToggle(true) }
+            .padding(horizontal = 16.dp, vertical = 12.dp)
+    ) {
+        Text(
+            text = label,
+            style = TextStyle(
+                color = MaterialTheme.colorScheme.onSurface,
+                fontSize = 16.sp,
+                fontWeight = FontWeight.Medium
+            )
+        )
+
+        DropdownMenu(
+            expanded = dropdownExpanded,
+            onDismissRequest = { onDropdownToggle(false) }
+        ) {
+            options.forEach { option ->
+                DropdownMenuItem(
+                    onClick = {
+                        onOptionSelected(option)
+                    },
+                    text = {
+                        Text(
+                            text = option,
+                            style = TextStyle(
+                                fontSize = 14.sp,
+                                fontWeight = FontWeight.Normal
+                            )
+                        )
+                    }
+                )
+            }
+        }
+    }
+}
+
+@Composable
+fun FilterChip(
+    label: String,
+    isSelected: Boolean,
+    onClick: () -> Unit
+) {
+    Box(
+        modifier = Modifier
+            .border(
+                width = 1.dp,
+                color = if (isSelected) MaterialTheme.colorScheme.primary else Color.Gray,
+                shape = RoundedCornerShape(16.dp)
+            )
+            .background(
+                color = if (isSelected) MaterialTheme.colorScheme.primary.copy(alpha = 0.2f) else Color.Transparent,
+                shape = RoundedCornerShape(16.dp)
+            )
+            .clickable { onClick() }
+            .padding(horizontal = 12.dp, vertical = 8.dp)
+    ) {
+        Text(
+            text = label,
+            style = TextStyle(
+                color = if (isSelected) MaterialTheme.colorScheme.primary else Color.Black,
+                fontWeight = FontWeight.SemiBold,
+                fontSize = 14.sp
+            )
+        )
     }
 }
 

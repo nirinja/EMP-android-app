@@ -9,6 +9,7 @@ import androidx.room.EntityDeletionOrUpdateAdapter;
 import androidx.room.EntityInsertionAdapter;
 import androidx.room.RoomDatabase;
 import androidx.room.RoomSQLiteQuery;
+import androidx.room.SharedSQLiteStatement;
 import androidx.room.util.CursorUtil;
 import androidx.room.util.DBUtil;
 import androidx.sqlite.db.SupportSQLiteStatement;
@@ -38,6 +39,8 @@ public final class RecipeDao_Impl implements RecipeDao {
   private final EntityDeletionOrUpdateAdapter<Recipe> __deletionAdapterOfRecipe;
 
   private final EntityDeletionOrUpdateAdapter<Recipe> __updateAdapterOfRecipe;
+
+  private final SharedSQLiteStatement __preparedStmtOfDeleteRecipeByName;
 
   public RecipeDao_Impl(@NonNull final RoomDatabase __db) {
     this.__db = __db;
@@ -155,6 +158,14 @@ public final class RecipeDao_Impl implements RecipeDao {
         statement.bindLong(11, entity.getRecipeId());
       }
     };
+    this.__preparedStmtOfDeleteRecipeByName = new SharedSQLiteStatement(__db) {
+      @Override
+      @NonNull
+      public String createQuery() {
+        final String _query = "DELETE FROM recipes WHERE name = ?";
+        return _query;
+      }
+    };
   }
 
   @Override
@@ -206,6 +217,36 @@ public final class RecipeDao_Impl implements RecipeDao {
           return Unit.INSTANCE;
         } finally {
           __db.endTransaction();
+        }
+      }
+    }, $completion);
+  }
+
+  @Override
+  public Object deleteRecipeByName(final String name,
+      final Continuation<? super Unit> $completion) {
+    return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
+      @Override
+      @NonNull
+      public Unit call() throws Exception {
+        final SupportSQLiteStatement _stmt = __preparedStmtOfDeleteRecipeByName.acquire();
+        int _argIndex = 1;
+        if (name == null) {
+          _stmt.bindNull(_argIndex);
+        } else {
+          _stmt.bindString(_argIndex, name);
+        }
+        try {
+          __db.beginTransaction();
+          try {
+            _stmt.executeUpdateDelete();
+            __db.setTransactionSuccessful();
+            return Unit.INSTANCE;
+          } finally {
+            __db.endTransaction();
+          }
+        } finally {
+          __preparedStmtOfDeleteRecipeByName.release(_stmt);
         }
       }
     }, $completion);

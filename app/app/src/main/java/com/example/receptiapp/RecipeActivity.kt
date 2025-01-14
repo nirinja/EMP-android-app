@@ -6,15 +6,12 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -30,7 +27,6 @@ import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
 import com.example.receptiapp.data.Recipe
 import kotlinx.coroutines.launch
-import org.json.JSONArray
 import org.json.JSONObject
 
 class RecipeActivity : ComponentActivity() {
@@ -53,24 +49,20 @@ class RecipeActivity : ComponentActivity() {
 }
 
 suspend fun saveRecipe(recipeData: JSONObject) {
-    try {
-        val recipe = Recipe(
-            name = recipeData.getString("name"),
-            ingredients = recipeData.getJSONArray("ingredients").toString(),
-            instructions = recipeData.getJSONArray("instructions").toString(),
-            prepTime = recipeData.getInt("prepTimeMinutes"),
-            cookTime = recipeData.getInt("cookTimeMinutes"),
-            difficulty = recipeData.getString("difficulty"),
-            image = recipeData.getString("image"),
-            mealType = recipeData.getJSONArray("mealType").toString(),
-            categoryId = null
-        )
+    val recipe = Recipe(
+        name = recipeData.getString("name"),
+        ingredients = recipeData.getJSONArray("ingredients").toString(),
+        instructions = recipeData.getJSONArray("instructions").toString(),
+        prepTime = recipeData.getInt("prepTimeMinutes"),
+        cookTime = recipeData.getInt("cookTimeMinutes"),
+        difficulty = recipeData.getString("difficulty"),
+        image = recipeData.getString("image"),
+        mealType = recipeData.getJSONArray("mealType").toString(),
+        categoryId = null
+    )
 
-        val recipeDao = MyApplication.database.recipeDao()
-        recipeDao.insertRecipe(recipe)
-    } catch (e: Exception) {
-        throw e // Re-throw exception to show error in the UI
-    }
+    val recipeDao = MyApplication.database.recipeDao()
+    recipeDao.insertRecipe(recipe)
 }
 
 @Composable
@@ -86,10 +78,15 @@ fun RecipeScreen(recipeJson: String, onBackClick: () -> Unit) {
     val cookTime = recipe.getInt("cookTimeMinutes")
     val difficulty = recipe.getString("difficulty")
     val imageUrl = recipe.getString("image")
-    val mealType = recipe.getString("mealType")
-        .removeSurrounding("[", "]")
-        .split(",")
-        .map { it.trim() }
+
+    // State to track if the recipe is saved
+    var isSaved by remember { mutableStateOf(false) }
+
+    // Check if the recipe is saved when the screen is loaded
+    LaunchedEffect(name) {
+        val recipeDao = MyApplication.database.recipeDao()
+        isSaved = recipeDao.getRecipeByName(name) != null
+    }
 
     Column(
         modifier = Modifier
@@ -126,6 +123,7 @@ fun RecipeScreen(recipeJson: String, onBackClick: () -> Unit) {
                 )
             }
 
+            // Back button
             IconButton(
                 onClick = onBackClick,
                 modifier = Modifier
@@ -139,14 +137,21 @@ fun RecipeScreen(recipeJson: String, onBackClick: () -> Unit) {
                 )
             }
 
+            // Save/Unsave button
             IconButton(
                 onClick = {
                     scope.launch {
-                        try {
+                        val recipeDao = MyApplication.database.recipeDao()
+                        if (isSaved) {
+                            // Unsave the recipe
+                            recipeDao.deleteRecipeByName(name)
+                            isSaved = false
+                            Toast.makeText(context, "Recipe removed from saved recipes.", Toast.LENGTH_SHORT).show()
+                        } else {
+                            // Save the recipe
                             saveRecipe(recipe)
+                            isSaved = true
                             Toast.makeText(context, "Recipe saved successfully!", Toast.LENGTH_SHORT).show()
-                        } catch (e: Exception) {
-                            Toast.makeText(context, "Failed to save recipe: ${e.message}", Toast.LENGTH_SHORT).show()
                         }
                     }
                 },
@@ -155,13 +160,16 @@ fun RecipeScreen(recipeJson: String, onBackClick: () -> Unit) {
                     .padding(10.dp)
             ) {
                 Icon(
-                    painter = painterResource(id = R.drawable.save),
-                    contentDescription = "Save Recipe",
+                    painter = painterResource(
+                        id = if (isSaved) R.drawable.saved else R.drawable.save
+                    ),
+                    contentDescription = if (isSaved) "Unsave Recipe" else "Save Recipe",
                     tint = MaterialTheme.colorScheme.onPrimary
                 )
             }
         }
 
+        // Recipe details (name, ingredients, instructions, etc.)
         Text(
             text = name,
             style = MaterialTheme.typography.headlineMedium.copy(
@@ -232,6 +240,7 @@ fun RecipeScreen(recipeJson: String, onBackClick: () -> Unit) {
     }
 }
 
+
 @Composable
 fun ErrorScreen() {
     Box(
@@ -245,4 +254,3 @@ fun ErrorScreen() {
         )
     }
 }
-
