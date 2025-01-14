@@ -7,6 +7,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -17,10 +18,12 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -95,12 +98,14 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+
 @Composable
 fun MainScreen(
-    onSearchClick: () -> Unit,
+    onSearchClick: (String) -> Unit,
     onSavedClick: () -> Unit
 ) {
     var recipes by remember { mutableStateOf<List<Recipe>>(emptyList()) }
+    var searchQuery by remember { mutableStateOf("") }
     val context = LocalContext.current
 
     LaunchedEffect(Unit) {
@@ -111,51 +116,96 @@ fun MainScreen(
         }
     }
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp)
-    ) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween
+    Scaffold(
+        bottomBar = {
+            BottomMenuBar(onSavedClick = onSavedClick)
+        }
+    ) { paddingValues ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValues)
+                .padding(16.dp)
         ) {
-            Button(onClick = onSearchClick) {
-                Text(text = "Search")
-            }
-            Button(onClick = onSavedClick) {
-                Text(text = "Saved")
+            // Search Bar
+            OutlinedTextField(
+                value = searchQuery,
+                onValueChange = { searchQuery = it },
+                placeholder = { Text("Search recipes...") },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 16.dp),
+                shape = RoundedCornerShape(8.dp),
+                singleLine = true,
+                trailingIcon = {
+                    IconButton(onClick = { onSearchClick(searchQuery) }) {
+                        Icon(
+                            painter = painterResource(id = android.R.drawable.ic_menu_search),
+                            contentDescription = "Search Icon"
+                        )
+                    }
+                }
+            )
+
+            // Recipes Grid
+            LazyVerticalGrid(
+                columns = GridCells.Fixed(2),
+                verticalArrangement = Arrangement.spacedBy(8.dp),
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                modifier = Modifier.fillMaxSize()
+            ) {
+                items(recipes.filter { it.name.contains(searchQuery, ignoreCase = true) }) { recipe ->
+                    RecipeItem(
+                        recipe = recipe,
+                        onClick = {
+                            val intent = Intent(context, RecipeActivity::class.java).apply {
+                                putExtra("RECIPE", JSONObject().apply {
+                                    put("name", recipe.name)
+                                    put("instructions", JSONArray(recipe.instructions))
+                                    put("ingredients", JSONArray(recipe.ingredients))
+                                    put("prepTimeMinutes", recipe.prepTime)
+                                    put("cookTimeMinutes", recipe.cookTime)
+                                    put("difficulty", recipe.difficulty)
+                                    put("image", recipe.image)
+                                    put("mealType", JSONArray(recipe.mealType))
+                                }.toString())
+                            }
+                            context.startActivity(intent)
+                        }
+                    )
+                }
             }
         }
+    }
+}
 
-        Spacer(modifier = Modifier.height(16.dp))
-
-        LazyVerticalGrid(
-            columns = GridCells.Fixed(2),
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-            modifier = Modifier.fillMaxSize()
+@Composable
+fun BottomMenuBar(onSavedClick: () -> Unit) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(35.dp) // Thinner height for the bar
+            .padding(horizontal = 16.dp) // Add spacing around the bar
+            .offset(y = (-60).dp)
+            .shadow(8.dp, RoundedCornerShape(16.dp)) // Shadow and rounded corners
+            .background(
+                color = Color.Black.copy(alpha = 0.6f),
+                shape = RoundedCornerShape(16.dp) // Rounded corners
+            )
+    ) {
+        IconButton(
+            onClick = onSavedClick,
+            modifier = Modifier
+                .align(Alignment.CenterEnd) // Align the icon to the right
+                .padding(end = 16.dp)
         ) {
-            items(recipes) { recipe ->
-                RecipeItem(
-                    recipe = recipe,
-                    onClick = {
-                        val intent = Intent(context, RecipeActivity::class.java).apply {
-                            putExtra("RECIPE", JSONObject().apply {
-                                put("name", recipe.name)
-                                put("instructions", JSONArray(recipe.instructions))
-                                put("ingredients", JSONArray(recipe.ingredients))
-                                put("prepTimeMinutes", recipe.prepTime.toInt())
-                                put("cookTimeMinutes", recipe.cookTime.toInt())
-                                put("difficulty", recipe.difficulty)
-                                put("imageUrl", recipe.image)
-                                put("mealType", recipe.mealType)
-                            }.toString())
-                        }
-                        context.startActivity(intent)
-                    }
-                )
-            }
+            Icon(
+                painter = painterResource(id = R.drawable.saved),
+                contentDescription = "Saved Recipes",
+                tint = MaterialTheme.colorScheme.onPrimary
+
+
+            )
         }
     }
 }
@@ -208,6 +258,41 @@ fun RecipeItem(recipe: Recipe, onClick: () -> Unit) {
                     )
                 }
             }
+
+            // Meal type tags - aligned to the right edge with each tag only as wide as needed
+            if (recipe.mealType.isNotEmpty()) {
+                Column(
+                    modifier = Modifier
+                        .align(Alignment.TopEnd) // Align Column to the top-right corner
+                        .padding(8.dp)
+                ) {
+                    recipe.mealType.forEach { mealType ->
+                        Box(
+                            modifier = Modifier
+                                .padding(bottom = 4.dp)
+                                .background(
+                                    color = Color.Black.copy(alpha = 0.6f),
+                                    shape = RoundedCornerShape(12.dp)
+                                )
+                                .border(
+                                    width = 1.dp,
+                                    color = Color.White,
+                                    shape = RoundedCornerShape(12.dp)
+                                )
+                                .padding(horizontal = 8.dp, vertical = 4.dp)
+                        ) {
+                            Text(
+                                text = mealType, // Display each meal type as a separate tag
+                                style = TextStyle(
+                                    color = Color.White,
+                                    fontSize = 12.sp,
+                                    fontWeight = FontWeight.SemiBold
+                                )
+                            )
+                        }
+                    }
+                }
+            }
         }
     }
 }
@@ -233,7 +318,8 @@ suspend fun loadRecipesFromDatabase(): List<Recipe> {
                     cookTime = recipe.cookTime,
                     difficulty = recipe.difficulty,
                     image = recipe.image,
-                    mealType = toListR(recipe.mealType)
+                    mealType = toListR(recipe.mealType),
+                    categoryId = null
                 )
             }
         } catch (e: Exception) {
@@ -280,7 +366,8 @@ fun parseRecipes(jsonArray: JSONArray): List<Recipe> {
                 cookTime = jsonObject.getInt("cookTimeMinutes"),
                 difficulty = jsonObject.getString("difficulty"),
                 image = jsonObject.getString("image"),
-                mealType = jsonObject.getJSONArray("mealType").toList()
+                mealType = jsonObject.getJSONArray("mealType").toList(),
+                categoryId = null
             )
         )
     }
@@ -299,5 +386,6 @@ data class Recipe(
     val cookTime: Int,
     val difficulty: String,
     val image: String,
-    val mealType: List<String>
+    val mealType: List<String>,
+    val categoryId: Int?
 )

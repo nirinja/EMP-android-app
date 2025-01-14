@@ -13,6 +13,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -25,7 +26,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
+import kotlinx.coroutines.launch
 import org.json.JSONObject
+import com.example.receptiapp.data.Recipe
+import org.json.JSONArray
+
 
 class RecipeActivity : ComponentActivity() {
 
@@ -48,20 +53,25 @@ class RecipeActivity : ComponentActivity() {
 
 }
 
-public fun saveRecipe(recipeData: JSONObject) {
-    recipeData.let { json ->
-        Recipe(
-            name = json.getString("name"),
-            ingredients = json.getJSONArray("ingredients").toList(),
-            instructions = json.getJSONArray("instructions").toList(),
-            prepTime = json.getInt("prepTimeMinutes"),
-            cookTime = json.getInt("cookTimeMinutes"),
-            difficulty = json.getString("difficulty"),
-            image = json.getString("image"),
-            mealType = json.getJSONArray("mealType").toList()
-        )
-    }
+suspend fun saveRecipe(recipeData: JSONObject) {
+    val recipe = com.example.receptiapp.data.Recipe(  // Ensure correct package
+        name = recipeData.getString("name"),
+        ingredients = recipeData.getJSONArray("ingredients").toString(),
+        instructions = recipeData.getJSONArray("instructions").toString(),
+        prepTime = recipeData.getInt("prepTimeMinutes"),
+        cookTime = recipeData.getInt("cookTimeMinutes"),
+        difficulty = recipeData.getString("difficulty"),
+        image = recipeData.getString("image"),
+        mealType = recipeData.getJSONArray("mealType").toString(),
+        categoryId = null
+    )
+
+    val recipeDao = MyApplication.database.recipeDao()
+    recipeDao.insertRecipe(recipe)
 }
+
+
+
 
 @Composable
 fun RecipeScreen(recipeJson: String, onBackClick: () -> Unit) {
@@ -72,7 +82,7 @@ fun RecipeScreen(recipeJson: String, onBackClick: () -> Unit) {
     val prepTime = recipe.getInt("prepTimeMinutes")
     val cookTime = recipe.getInt("cookTimeMinutes")
     val difficulty = recipe.getString("difficulty")
-    val imageUrl = recipe.getString("imageUrl")
+    val imageUrl = recipe.getString("image")
     val mealType = recipe.getString("mealType")
         .removeSurrounding("[", "]")
         .split(",")
@@ -130,18 +140,25 @@ fun RecipeScreen(recipeJson: String, onBackClick: () -> Unit) {
                 )
             }
 
+            val scope = rememberCoroutineScope()
+
             IconButton(
-                onClick = {saveRecipe(recipe) },
+                onClick = {
+                    scope.launch {
+                        saveRecipe(recipe)
+                    }
+                },
                 modifier = Modifier
                     .align(Alignment.TopEnd)
                     .padding(10.dp)
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.save),
-                    contentDescription = "Saved Recipes",
+                    contentDescription = "Save Recipe",
                     tint = MaterialTheme.colorScheme.onPrimary
                 )
             }
+
 
             // Meal types displayed in a Row at the bottom left
             if (mealType.size > 0) {
