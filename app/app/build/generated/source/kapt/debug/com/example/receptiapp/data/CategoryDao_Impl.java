@@ -55,7 +55,8 @@ public final class CategoryDao_Impl implements CategoryDao {
   }
 
   @Override
-  public Object insertCategory(final Category category, final Continuation<? super Long> arg1) {
+  public Object insertCategory(final Category category,
+      final Continuation<? super Long> $completion) {
     return CoroutinesRoom.execute(__db, true, new Callable<Long>() {
       @Override
       @NonNull
@@ -69,11 +70,11 @@ public final class CategoryDao_Impl implements CategoryDao {
           __db.endTransaction();
         }
       }
-    }, arg1);
+    }, $completion);
   }
 
   @Override
-  public Object getCategoryById(final int id, final Continuation<? super Category> arg1) {
+  public Object getCategoryById(final int id, final Continuation<? super Category> $completion) {
     final String _sql = "SELECT * FROM categories WHERE categoryId = ?";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);
     int _argIndex = 1;
@@ -107,11 +108,11 @@ public final class CategoryDao_Impl implements CategoryDao {
           _statement.release();
         }
       }
-    }, arg1);
+    }, $completion);
   }
 
   @Override
-  public Object getAllCategories(final Continuation<? super List<Category>> arg0) {
+  public Object getAllCategories(final Continuation<? super List<Category>> $completion) {
     final String _sql = "SELECT * FROM categories";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 0);
     final CancellationSignal _cancellationSignal = DBUtil.createCancellationSignal();
@@ -143,7 +144,7 @@ public final class CategoryDao_Impl implements CategoryDao {
           _statement.release();
         }
       }
-    }, arg0);
+    }, $completion);
   }
 
   @NonNull

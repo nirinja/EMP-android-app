@@ -9,6 +9,7 @@ public final class MainActivityKt {
     @org.jetbrains.annotations.NotNull()
     private static java.lang.String searchtemp = "";
     
+    @android.annotation.SuppressLint(value = {"UnusedMaterial3ScaffoldPaddingParameter"})
     @androidx.compose.runtime.Composable()
     public static final void MainScreen(@org.jetbrains.annotations.NotNull()
     kotlin.jvm.functions.Function1<? super java.lang.String, kotlin.Unit> onSearchClick, @org.jetbrains.annotations.NotNull()

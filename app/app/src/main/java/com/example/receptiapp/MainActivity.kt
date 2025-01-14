@@ -1,6 +1,12 @@
 package com.example.receptiapp
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
@@ -46,6 +52,9 @@ private var searchtemp = ""
 class MainActivity : ComponentActivity() {
 
     private val TAG = "MainActivityLifecycle"
+    private lateinit var sensorManager: SensorManager
+    private var lightSensor: Sensor? = null
+    private lateinit var lightSensorListener: SensorEventListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,23 +62,37 @@ class MainActivity : ComponentActivity() {
         saved = intent.getStringExtra("SAVED") ?: ""
         search = intent.getStringExtra("SEARCH") ?: ""
 
-        val intent = Intent(this, LightSensorActivity::class.java)
-        startActivity(intent)
+        // Initialize SensorManager and Light Sensor
+        sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
+        lightSensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT)
+        var isDarkTheme by mutableStateOf(false)
+
+        lightSensorListener = object : SensorEventListener {
+            override fun onSensorChanged(event: SensorEvent?) {
+                val lightLevel = event?.values?.get(0) ?: 0f
+                // Switch theme based on light level
+                isDarkTheme = lightLevel < 70 // Example threshold for switching themes
+            }
+
+            override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {}
+        }
 
         setContent {
-            ReceptiAppTheme {
-                MainScreen(
-                    onSearchClick = {
-                        val intent = Intent(this, MainActivity::class.java)
-                        intent.putExtra("SEARCH", searchtemp)
-                        startActivity(intent)
-                    },
-                    onSavedClick = {
-                        val intent = Intent(this, MainActivity::class.java)
-                        intent.putExtra("SAVED", "SAVED")
-                        startActivity(intent)
-                    }
-                )
+            com.example.receptiapp.ui.theme.ReceptiAppTheme(darkTheme = isDarkTheme) {
+                Surface(color = MaterialTheme.colorScheme.background) {
+                    MainScreen(
+                        onSearchClick = {
+                            val intent = Intent(this, MainActivity::class.java)
+                            intent.putExtra("SEARCH", searchtemp)
+                            startActivity(intent)
+                        },
+                        onSavedClick = {
+                            val intent = Intent(this, MainActivity::class.java)
+                            intent.putExtra("SAVED", "SAVED")
+                            startActivity(intent)
+                        }
+                    )
+                }
             }
         }
         Log.d(TAG, "onCreate() called")
@@ -82,11 +105,19 @@ class MainActivity : ComponentActivity() {
 
     override fun onResume() {
         super.onResume()
+        lightSensor?.let {
+            sensorManager.registerListener(
+                lightSensorListener,
+                it,
+                SensorManager.SENSOR_DELAY_NORMAL
+            )
+        }
         Log.d(TAG, "onResume() called")
     }
 
     override fun onPause() {
         super.onPause()
+        sensorManager.unregisterListener(lightSensorListener)
         Log.d(TAG, "onPause() called")
     }
 
@@ -107,9 +138,8 @@ class MainActivity : ComponentActivity() {
 }
 
 
-
-
 // Fixes applied to MainScreen and DropdownMenuItem usage
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun MainScreen(
     onSearchClick: (String) -> Unit,
@@ -138,12 +168,11 @@ fun MainScreen(
         bottomBar = {
             BottomMenuBar(onSavedClick = onSavedClick)
         }
-    ) { paddingValues -> // paddingValues je parameter, ki ga Scaffold posreduje
+    ) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(paddingValues) // Uporabi paddingValues za dinamično prilagoditev vsebine
-                .padding(16.dp) // Dodaten padding za notranji odmik
+                .padding(16.dp)
         ) {
             // Search Bar
             OutlinedTextField(

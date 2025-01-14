@@ -1,9 +1,20 @@
 package com.example.receptiapp
 
-import android.content.Intent
+import android.content.Context
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.runtime.*
+import com.example.receptiapp.ui.theme.ReceptiAppTheme
+import android.content.Intent
+import android.util.Log
+import android.widget.Toast
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -32,22 +43,62 @@ import org.json.JSONObject
 
 class RecipeActivity : ComponentActivity() {
 
+    private lateinit var sensorManager: SensorManager
+    private var lightSensor: Sensor? = null
+    private lateinit var lightSensorListener: SensorEventListener
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Initialize SensorManager and Light Sensor
+        sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
+        lightSensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT)
+        var isDarkTheme by mutableStateOf(false)
+
+        lightSensorListener = object : SensorEventListener {
+            override fun onSensorChanged(event: SensorEvent?) {
+                val lightLevel = event?.values?.get(0) ?: 0f
+                // Switch theme based on light level
+                isDarkTheme = lightLevel < 70 // Example threshold for switching themes
+            }
+
+            override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {}
+        }
 
         val recipeData = intent.getStringExtra("RECIPE") ?: ""
 
         setContent {
-            ReceptiAppTheme {
-                if (recipeData.isNotEmpty()) {
-                    RecipeScreen(recipeJson = recipeData, onBackClick = { finish() })
-                } else {
-                    ErrorScreen()
+            com.example.receptiapp.ui.theme.ReceptiAppTheme(darkTheme = isDarkTheme) {
+                Surface(color = MaterialTheme.colorScheme.background) {
+                    ReceptiAppTheme {
+                        if (recipeData.isNotEmpty()) {
+                            RecipeScreen(recipeJson = recipeData, onBackClick = { finish() })
+                        } else {
+                            ErrorScreen()
+                        }
+                    }
                 }
             }
         }
     }
+
+    override fun onResume() {
+        super.onResume()
+        lightSensor?.let {
+            sensorManager.registerListener(
+                lightSensorListener,
+                it,
+                SensorManager.SENSOR_DELAY_NORMAL
+            )
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        sensorManager.unregisterListener(lightSensorListener)
+    }
 }
+
 
 suspend fun saveRecipe(recipeData: JSONObject) {
     val recipe = Recipe(
@@ -147,12 +198,20 @@ fun RecipeScreen(recipeJson: String, onBackClick: () -> Unit) {
                             // Unsave the recipe
                             recipeDao.deleteRecipeByName(name)
                             isSaved = false
-                            Toast.makeText(context, "Recipe removed from saved recipes.", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                context,
+                                "Recipe removed from saved recipes.",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         } else {
                             // Save the recipe
                             saveRecipe(recipe)
                             isSaved = true
-                            Toast.makeText(context, "Recipe saved successfully!", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                context,
+                                "Recipe saved successfully!",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                     }
                 },
