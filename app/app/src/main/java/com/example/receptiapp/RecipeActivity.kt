@@ -1,6 +1,7 @@
 package com.example.receptiapp
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
@@ -20,24 +21,23 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
-import kotlinx.coroutines.launch
-import org.json.JSONObject
 import com.example.receptiapp.data.Recipe
+import kotlinx.coroutines.launch
 import org.json.JSONArray
-
+import org.json.JSONObject
 
 class RecipeActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Fetch recipe data from the Intent
         val recipeData = intent.getStringExtra("RECIPE") ?: ""
 
         setContent {
@@ -50,32 +50,35 @@ class RecipeActivity : ComponentActivity() {
             }
         }
     }
-
 }
 
 suspend fun saveRecipe(recipeData: JSONObject) {
-    val recipe = com.example.receptiapp.data.Recipe(  // Ensure correct package
-        name = recipeData.getString("name"),
-        ingredients = recipeData.getJSONArray("ingredients").toString(),
-        instructions = recipeData.getJSONArray("instructions").toString(),
-        prepTime = recipeData.getInt("prepTimeMinutes"),
-        cookTime = recipeData.getInt("cookTimeMinutes"),
-        difficulty = recipeData.getString("difficulty"),
-        image = recipeData.getString("image"),
-        mealType = recipeData.getJSONArray("mealType").toString(),
-        categoryId = null
-    )
+    try {
+        val recipe = Recipe(
+            name = recipeData.getString("name"),
+            ingredients = recipeData.getJSONArray("ingredients").toString(),
+            instructions = recipeData.getJSONArray("instructions").toString(),
+            prepTime = recipeData.getInt("prepTimeMinutes"),
+            cookTime = recipeData.getInt("cookTimeMinutes"),
+            difficulty = recipeData.getString("difficulty"),
+            image = recipeData.getString("image"),
+            mealType = recipeData.getJSONArray("mealType").toString(),
+            categoryId = null
+        )
 
-    val recipeDao = MyApplication.database.recipeDao()
-    recipeDao.insertRecipe(recipe)
+        val recipeDao = MyApplication.database.recipeDao()
+        recipeDao.insertRecipe(recipe)
+    } catch (e: Exception) {
+        throw e // Re-throw exception to show error in the UI
+    }
 }
-
-
-
 
 @Composable
 fun RecipeScreen(recipeJson: String, onBackClick: () -> Unit) {
+    val scope = rememberCoroutineScope()
+    val context = LocalContext.current
     val recipe = remember { JSONObject(recipeJson) }
+
     val name = recipe.getString("name")
     val ingredients = recipe.getJSONArray("ingredients")
     val instructions = recipe.getJSONArray("instructions")
@@ -100,7 +103,6 @@ fun RecipeScreen(recipeJson: String, onBackClick: () -> Unit) {
                 .height(250.dp)
                 .padding(vertical = 8.dp)
         ) {
-            // Image with gradient overlay
             Box(modifier = Modifier.fillMaxSize()) {
                 Image(
                     painter = rememberAsyncImagePainter(imageUrl),
@@ -111,7 +113,6 @@ fun RecipeScreen(recipeJson: String, onBackClick: () -> Unit) {
                         .clip(RoundedCornerShape(12.dp))
                 )
 
-                // Gradient overlay (transparent to black from top to middle)
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
@@ -125,27 +126,28 @@ fun RecipeScreen(recipeJson: String, onBackClick: () -> Unit) {
                 )
             }
 
-            // IconButton (instead of "Back" text, using an icon)
             IconButton(
                 onClick = onBackClick,
                 modifier = Modifier
                     .align(Alignment.TopStart)
                     .padding(10.dp)
             ) {
-                // Replace with your custom icon
                 Icon(
-                    painter = painterResource(id = R.drawable.left_big),  // Replace ic_back with your custom icon
+                    painter = painterResource(id = R.drawable.left_big),
                     contentDescription = "Back",
-                    tint = Color.White // Set the tint color, or you can leave it as is
+                    tint = Color.White
                 )
             }
-
-            val scope = rememberCoroutineScope()
 
             IconButton(
                 onClick = {
                     scope.launch {
-                        saveRecipe(recipe)
+                        try {
+                            saveRecipe(recipe)
+                            Toast.makeText(context, "Recipe saved successfully!", Toast.LENGTH_SHORT).show()
+                        } catch (e: Exception) {
+                            Toast.makeText(context, "Failed to save recipe: ${e.message}", Toast.LENGTH_SHORT).show()
+                        }
                     }
                 },
                 modifier = Modifier
@@ -158,45 +160,6 @@ fun RecipeScreen(recipeJson: String, onBackClick: () -> Unit) {
                     tint = MaterialTheme.colorScheme.onPrimary
                 )
             }
-
-
-            // Meal types displayed in a Row at the bottom left
-            if (mealType.size > 0) {
-                Row(
-                    modifier = Modifier
-                        .align(Alignment.BottomStart)
-                        .padding(start = 10.dp, bottom = 10.dp)
-                ) {
-                    mealType.let { mealTypes ->
-                        for (i in 0 until mealTypes.size) {
-                            val meal = mealTypes[i]
-                            Box(
-                                modifier = Modifier
-                                    .padding(end = 8.dp)
-                                    .background(
-                                        color = Color.Black.copy(alpha = 0.6f),
-                                        shape = RoundedCornerShape(12.dp)
-                                    )
-                                    .border(
-                                        width = 1.dp,
-                                        color = Color.White,
-                                        shape = RoundedCornerShape(12.dp)
-                                    )
-                                    .padding(horizontal = 8.dp, vertical = 4.dp)
-                            ) {
-                                Text(
-                                    text = meal,
-                                    style = TextStyle(
-                                        color = Color.White,
-                                        fontSize = 12.sp,
-                                        fontWeight = FontWeight.SemiBold
-                                    )
-                                )
-                            }
-                        }
-                    }
-                }
-            }
         }
 
         Text(
@@ -204,8 +167,7 @@ fun RecipeScreen(recipeJson: String, onBackClick: () -> Unit) {
             style = MaterialTheme.typography.headlineMedium.copy(
                 color = Color.Black,
                 fontWeight = FontWeight.Bold
-            ),
-            modifier = Modifier
+            )
         )
 
         Text(
@@ -220,26 +182,18 @@ fun RecipeScreen(recipeJson: String, onBackClick: () -> Unit) {
             fontWeight = FontWeight.SemiBold
         )
 
-        // Ingredients listed in a Column with smaller spacing
         Column(modifier = Modifier.padding(start = 8.dp, top = 4.dp, bottom = 4.dp)) {
             for (i in 0 until ingredients.length()) {
                 val ingredient = ingredients.getString(i)
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.padding(bottom = 2.dp) // Reduced bottom padding
+                    modifier = Modifier.padding(bottom = 2.dp)
                 ) {
-                    // Bullet point (using a character for bullet)
                     Text(
                         text = "•",
-                        style = TextStyle(
-                            fontSize = 20.sp, // Bigger bullet size
-                            color = Color.Black
-                        )
+                        style = TextStyle(fontSize = 20.sp, color = Color.Black)
                     )
-
                     Spacer(modifier = Modifier.width(8.dp))
-
-                    // Display the ingredient text
                     Text(
                         text = ingredient,
                         style = MaterialTheme.typography.bodyMedium,
@@ -260,21 +214,14 @@ fun RecipeScreen(recipeJson: String, onBackClick: () -> Unit) {
                 val instruction = instructions.getString(i)
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.padding(bottom = 2.dp) // Reduced bottom padding
+                    modifier = Modifier.padding(bottom = 2.dp)
                 ) {
-                    // Bullet point (using a character for bullet)
                     Text(
                         text = "•",
-                        style = TextStyle(
-                            fontSize = 20.sp, // Bigger bullet size
-                            color = Color.Black
-                        )
+                        style = TextStyle(fontSize = 20.sp, color = Color.Black)
                     )
-
                     Spacer(modifier = Modifier.width(8.dp))
-
-                    // Display the ingredient text
-                    Text (
+                    Text(
                         text = instruction,
                         style = MaterialTheme.typography.bodyMedium,
                         modifier = Modifier.padding(end = 8.dp)
@@ -282,11 +229,8 @@ fun RecipeScreen(recipeJson: String, onBackClick: () -> Unit) {
                 }
             }
         }
-
-        Spacer(modifier = Modifier.height(16.dp))
     }
 }
-
 
 @Composable
 fun ErrorScreen() {
