@@ -233,7 +233,7 @@ fun RecipeScreen(recipeJson: String, onBackClick: () -> Unit) {
         Text(
             text = name,
             style = MaterialTheme.typography.headlineMedium.copy(
-                color = Color.Black,
+                color = MaterialTheme.colorScheme.onPrimary,
                 fontWeight = FontWeight.Bold
             )
         )
@@ -259,11 +259,11 @@ fun RecipeScreen(recipeJson: String, onBackClick: () -> Unit) {
                 ) {
                     Text(
                         text = "•",
-                        style = TextStyle(fontSize = 20.sp, color = Color.Black)
+                        style = TextStyle(fontSize = 20.sp, color = MaterialTheme.colorScheme.onPrimary)
                     )
                     Spacer(modifier = Modifier.width(8.dp))
                     Text(
-                        text = ingredient,
+                        text = ingredient.replace("[", "").replace("]", "").replace("\"", ""),
                         style = MaterialTheme.typography.bodyMedium,
                         modifier = Modifier.padding(end = 8.dp)
                     )
@@ -286,11 +286,11 @@ fun RecipeScreen(recipeJson: String, onBackClick: () -> Unit) {
                 ) {
                     Text(
                         text = "•",
-                        style = TextStyle(fontSize = 20.sp, color = Color.Black)
+                        style = TextStyle(fontSize = 20.sp, color = MaterialTheme.colorScheme.onPrimary)
                     )
                     Spacer(modifier = Modifier.width(8.dp))
                     Text(
-                        text = instruction,
+                        text = instruction.replace("[", "").replace("]", "").replace("\"", ""),
                         style = MaterialTheme.typography.bodyMedium,
                         modifier = Modifier.padding(end = 8.dp)
                     )

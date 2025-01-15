@@ -403,7 +403,7 @@ fun RecipeItem(recipe: Recipe, onClick: () -> Unit) {
         Box(modifier = Modifier.height(200.dp)) {
             AsyncImage(
                 model = recipe.image,
-                contentDescription = recipe.name,
+                contentDescription = recipe.name.replace("[", "").replace("]", "").replace("\"", ""),
                 contentScale = ContentScale.Crop,
                 modifier = Modifier.fillMaxSize()
             )
@@ -462,7 +462,7 @@ fun RecipeItem(recipe: Recipe, onClick: () -> Unit) {
                                 .padding(horizontal = 8.dp, vertical = 4.dp)
                         ) {
                             Text(
-                                text = mealType, // Display each meal type as a separate tag
+                                text = mealType.replace("[", "").replace("]", "").replace("\"", ""), // Display each meal type as a separate tag
                                 style = TextStyle(
                                     color = Color.White,
                                     fontSize = 12.sp,
