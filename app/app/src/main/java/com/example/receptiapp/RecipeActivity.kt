@@ -59,7 +59,7 @@ class RecipeActivity : ComponentActivity() {
             override fun onSensorChanged(event: SensorEvent?) {
                 val lightLevel = event?.values?.get(0) ?: 0f
                 // Switch theme based on light level
-                isDarkTheme = lightLevel < 70 // Example threshold for switching themes
+                isDarkTheme = lightLevel < 50 // Example threshold for switching themes
             }
 
             override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {}
@@ -228,15 +228,13 @@ fun RecipeScreen(recipeJson: String, onBackClick: () -> Unit) {
                 )
             }
         }
-
-        // Recipe details (name, ingredients, instructions, etc.)
+        
         Text(
             text = name,
-            style = MaterialTheme.typography.headlineMedium.copy(
-                color = MaterialTheme.colorScheme.onPrimary,
-                fontWeight = FontWeight.Bold
-            )
+            style = MaterialTheme.typography.headlineMedium,
+            fontWeight = FontWeight.Bold
         )
+
 
         Text(
             text = "Preparation: $prepTime min | Cook time: $cookTime | Difficulty: $difficulty",

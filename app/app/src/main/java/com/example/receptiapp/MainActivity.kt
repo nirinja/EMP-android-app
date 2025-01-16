@@ -71,7 +71,7 @@ class MainActivity : ComponentActivity() {
             override fun onSensorChanged(event: SensorEvent?) {
                 val lightLevel = event?.values?.get(0) ?: 0f
                 // Switch theme based on light level
-                isDarkTheme = lightLevel < 70 // Example threshold for switching themes
+                isDarkTheme = lightLevel < 50 // Example threshold for switching themes
             }
 
             override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {}
