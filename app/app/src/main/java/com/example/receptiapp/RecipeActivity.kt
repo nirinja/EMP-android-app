@@ -228,7 +228,7 @@ fun RecipeScreen(recipeJson: String, onBackClick: () -> Unit) {
                 )
             }
         }
-        
+
         Text(
             text = name,
             style = MaterialTheme.typography.headlineMedium,
@@ -257,7 +257,7 @@ fun RecipeScreen(recipeJson: String, onBackClick: () -> Unit) {
                 ) {
                     Text(
                         text = "•",
-                        style = TextStyle(fontSize = 20.sp, color = MaterialTheme.colorScheme.onPrimary)
+                        style = MaterialTheme.typography.titleLarge,
                     )
                     Spacer(modifier = Modifier.width(8.dp))
                     Text(
@@ -279,13 +279,14 @@ fun RecipeScreen(recipeJson: String, onBackClick: () -> Unit) {
             for (i in 0 until instructions.length()) {
                 val instruction = instructions.getString(i)
                 Row(
-                    verticalAlignment = Alignment.CenterVertically,
+                    verticalAlignment = Alignment.Top,
                     modifier = Modifier.padding(bottom = 2.dp)
                 ) {
                     Text(
                         text = "•",
-                        style = TextStyle(fontSize = 20.sp, color = MaterialTheme.colorScheme.onPrimary)
+                        style = MaterialTheme.typography.titleLarge
                     )
+
                     Spacer(modifier = Modifier.width(8.dp))
                     Text(
                         text = instruction.replace("[", "").replace("]", "").replace("\"", ""),

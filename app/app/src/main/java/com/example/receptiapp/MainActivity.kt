@@ -172,7 +172,8 @@ fun MainScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(16.dp)
+                .padding(bottom = 16.dp, top = 40.dp)
+                .padding(horizontal = 16.dp)
         ) {
             // Search Bar
             OutlinedTextField(
@@ -319,7 +320,7 @@ fun FilterDropdown(
             )
             .border(
                 width = 1.dp,
-                color = Color.Black,
+                color = MaterialTheme.colorScheme.onSurface,
                 shape = RoundedCornerShape(6.dp)
             )
             .clickable { onDropdownToggle(true) }
@@ -328,7 +329,7 @@ fun FilterDropdown(
         Text(
             text = label,
             style = TextStyle(
-                color = Color.Black,
+                color = MaterialTheme.colorScheme.onSurface,
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Normal
             )
@@ -365,8 +366,8 @@ fun BottomMenuBar(onSavedClick: () -> Unit) {
         modifier = Modifier
             .fillMaxWidth()
             .height(80.dp) // Height of the bar
-            .padding(horizontal = 16.dp) // Spacing from the sides
-            .offset(y = (-80).dp) // Adjust position
+            .padding(horizontal = 14.dp) // Spacing from the sides
+            .offset(y = (-55).dp) // Adjust position
     ) {
         IconButton(
             onClick = onSavedClick,
@@ -449,11 +450,12 @@ fun RecipeItem(recipe: Recipe, onClick: () -> Unit) {
                     recipe.mealType.forEach { mealType ->
                         Box(
                             modifier = Modifier
-                                .padding(bottom = 4.dp)
+                                .padding(bottom = 2.dp)
                                 .background(
                                     color = Color.Black.copy(alpha = 0.6f),
                                     shape = RoundedCornerShape(12.dp)
                                 )
+                                .align(Alignment.End)
                                 .border(
                                     width = 1.dp,
                                     color = Color.White,
